@@ -1,3 +1,20 @@
-.head{
-    background-color: #7E9EB7;
+.fondo{
+    background-color: #FFDD86;
 }
+ .card {      
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+.imagen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    color: #FFDD86;
+}
+      
+  
