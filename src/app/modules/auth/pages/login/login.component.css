@@ -6,6 +6,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 2000px;
+    height: 450px;
  }
 .imagen{
     position: absolute;
@@ -15,6 +17,9 @@
     width: 500px;
     height: 500px;
     color: #FFDD86;
+}
+.btn{
+    background-color: #C01818;
 }
       
   
