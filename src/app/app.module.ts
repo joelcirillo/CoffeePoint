@@ -11,13 +11,17 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { MapaComponent } from './shared/mapa/mapa.component';
 
  const routes:Routes=[
   {path:'home', component:HomeComponent},
  ]
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    MapaComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
