@@ -1,5 +1,6 @@
 
 *{
+    color: #893920;
     font-family: 'Josefin Sans', sans-serif;
 }
 div{
@@ -8,22 +9,23 @@ div{
     float: right;
     height: 500px;
     width: 400px;
-    border: brown 10px double;
+    border: #893920 10px double;
     border-radius: 20px;
 }
 ul{
     padding: 0;
-    border-radius: 20px;
-    background-color: aquamarine;
     list-style: none;
 }
 li{
     padding-left: 15px;
-    padding-top: 40px;
+    padding-top: 35px;
     height: 96px;
 }
 .amarillo{
-    background-color: aqua;
+    background-color: #feefc6;
+}
+.blanco{
+    background-color: #FFF;
 }
 .titulo{
     font-size: 25px;

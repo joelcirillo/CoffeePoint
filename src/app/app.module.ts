@@ -11,9 +11,8 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { MapaComponent } from './shared/mapa/mapa.component';
-import { CuadroComponent } from './shared/cuadro/cuadro.component';
+import { SharedModule } from './shared/shared.module';
+
 
  const routes:Routes=[
   {path:'home', component:HomeComponent},
@@ -21,14 +20,13 @@ import { CuadroComponent } from './shared/cuadro/cuadro.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    MapaComponent,
-    CuadroComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
+    //llamamos al shared module
+    SharedModule,
     //llamando modulos firebase,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
