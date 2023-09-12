@@ -1,0 +1,16 @@
+
+.container{
+    position: relative;
+   
+}
+.container h2{
+    color: #893920;
+    font-family: 'PT Serif', serif;
+    text-align: center;
+    padding-top: 20px;
+    margin: 0px;
+    width: 645px;
+    height: 60px;
+    background-color: #fff7e5;
+    position: absolute;
+}
