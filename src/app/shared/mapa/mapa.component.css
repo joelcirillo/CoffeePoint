@@ -1,11 +1,13 @@
-
+*{
+    font-family: 'Josefin Sans', sans-serif;
+}
 .container{
     position: relative;
    
 }
 .container h2{
     color: #893920;
-    font-family: 'PT Serif', serif;
+    
     text-align: center;
     padding-top: 20px;
     margin: 0px;
