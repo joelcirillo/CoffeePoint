@@ -1,4 +1,7 @@
 
+*{
+    font-family: 'Josefin Sans', sans-serif;
+}
 div{
     margin-right: 170px;
    margin-top: 50px;
@@ -7,4 +10,21 @@ div{
     width: 400px;
     border: brown 10px double;
     border-radius: 20px;
+}
+ul{
+    padding: 0;
+    border-radius: 20px;
+    background-color: aquamarine;
+    list-style: none;
+}
+li{
+    padding-left: 15px;
+    padding-top: 40px;
+    height: 96px;
+}
+.amarillo{
+    background-color: aqua;
+}
+.titulo{
+    font-size: 25px;
 }
