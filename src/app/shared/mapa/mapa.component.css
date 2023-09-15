@@ -1,7 +1,11 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
+    
 }
 .container{
+    position: absolute;
+  left: 0; /* Coloca el contenido a la izquierda */
+  top: 0;
     position: relative;
    
 }

@@ -5,9 +5,11 @@
 }
 
 div{
-    margin-right: 170px;
+    user-select: auto;
+    overflow-y: scroll;
+    max-height: 700px;
+    /*margin-right: 170px;*/
    margin-top: 50px;
-    float: right;
     height: 500px;
     width: 400px;
     border: #893920 10px double;
