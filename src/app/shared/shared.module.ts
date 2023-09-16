@@ -8,6 +8,7 @@ import { LugarComponent } from './lugar/lugar.component';
 
 
 
+
 @NgModule({
   declarations: [
     CuadroComponent,
@@ -22,7 +23,8 @@ import { LugarComponent } from './lugar/lugar.component';
   exports:[
     CuadroComponent,
     MapaComponent,
-    NavbarComponent
+    NavbarComponent,
+    LugarComponent
   ]
 })
 export class SharedModule { }

@@ -12,7 +12,7 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
-import { LugarComponent } from './shared/lugar/lugar.component';
+import { CambiarmapaService } from './shared/cambiarmapa.service';
 
 
  const routes:Routes=[
@@ -20,8 +20,7 @@ import { LugarComponent } from './shared/lugar/lugar.component';
  ]
 @NgModule({
   declarations: [
-    AppComponent,
-    LugarComponent,
+    AppComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -37,7 +36,7 @@ import { LugarComponent } from './shared/lugar/lugar.component';
   exports:[
     RouterModule,
   ],
-  providers: [],
+  providers: [CambiarmapaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
