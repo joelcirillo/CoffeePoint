@@ -8,4 +8,10 @@ import { Router } from "@angular/router";
 })
 export class AppComponent {
   title = 'coffee_point';
+  constructor(private router: Router) { }
+
+  cambiarMapa() {
+    // Navegar a la ruta del nuevo componente
+    this.router.navigate(['/lugar']);
+  }
 }
