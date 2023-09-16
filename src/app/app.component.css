@@ -1,0 +1,53 @@
+.card {      
+    background-color: #FFDD86;
+    position: absolute;
+    top: 70%;
+    left: -90%;
+    transform: translate(-50%, -50%);
+    width: 2000px;
+    height: 450px;
+    font-family: 'Josefin Sans', sans-serif;
+    border:none;
+}
+
+div{
+    user-select: auto;
+    overflow-y: scroll;
+    max-height: 700px;
+
+    margin-right: 120px;
+    position:absolute;
+    right: 0;
+    top: 0;
+    margin-top: 150px;
+    height: 450px;
+    width: 400px;
+    border: #893920 10px double;
+    border-radius: 20px;
+}
+ul{
+ padding: 0;
+ list-style: none;
+}
+li{
+    padding-left: 15px;
+    padding-top: 35px;
+    height: 96px;
+}
+.amarillo{
+    background-color: #feefc6;
+}
+.blanco{
+    background-color: #FFF;
+}
+.titulo{
+    font-size: 25px;
+}
+
+ .container{
+ margin-left:60px;
+ float:left;
+ position:relative;
+
+} 
+
