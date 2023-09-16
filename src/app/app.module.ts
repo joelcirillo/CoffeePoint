@@ -12,6 +12,7 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { LugarComponent } from './lugar/lugar.component';
 
 
  const routes:Routes=[
@@ -20,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
+    LugarComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
