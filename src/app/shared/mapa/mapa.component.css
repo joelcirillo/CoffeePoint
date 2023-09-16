@@ -1,11 +1,10 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
-    
 }
 .container{
-    position: absolute;
-  left: 0; /* Coloca el contenido a la izquierda */
-  top: 0;
+    margin-left: 60px;
+    float:left;
+
     position: relative;
    
 }
@@ -21,6 +20,6 @@
     position: absolute;
 }
 .barra{
-    margin-left: 200px;
+    margin-left: 150px;
     position: relative;
 }
