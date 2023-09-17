@@ -1,7 +1,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
-<button type="button"  class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menús</button>
+<div class="fondo">
+<button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menús</button><button type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menús</button><button type="button" (click)="mostrarCafeterias()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Cafeterías</button>
 <div class="container" [hidden]="ocultarComponente" >
         <div class="coffee">
             <h2>- Busca tu cafetería aquí -</h2>
@@ -24,30 +25,87 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
  <div>
-  <div class="cuadro">
+  <div [hidden]="ocultarCafe" class="cuadro">
       <ul>
-          <li (click)="esconderComponente()" class="titulo amarillo">
-              pepito cafeteria
+          <li (click)="mostrarCafeteria()" class="titulo amarillo">
+              1- Pepito Cafeteria <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
           </li>
           <li  class="titulo blanco">
-              1946
+              2- 1946 <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
           </li>
           <li class="titulo amarillo">
-             dunells
+             3- Dunells <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
           </li>
           <li  class="titulo blanco">
-              caju
+              4- Caju <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
            </li>
            <li  class="titulo amarillo">
-              estacion margus
+              5- Estacion Margus <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
            </li>
            <li  class="titulo blanco">
-              caju
+              6- Pucara <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
            </li>
            <li  class="titulo amarillo">
-              caju
+              7- Plaza Bar <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
            </li>
       </ul>
       
   </div>
 </div> 
+<div>
+    <div [hidden]="ocultarMenuGeneral" class="cuadro">
+        <ul>
+            <li  class="titulo amarillo">
+                Cheeseecake $200 (Estacion Margus)
+            </li>
+            <li  class="titulo blanco">
+                Medialunas $400 (1946)
+            </li>
+            <li class="titulo amarillo">
+                Cafe + Tostados $1000 (1946)
+            </li>
+            <li  class="titulo blanco">
+                Tiramisú $500 (Plaza Bar)
+             </li>
+             <li  class="titulo amarillo">
+                Cappuchino $450 (Caju)
+             </li>
+             <li  class="titulo blanco">
+                Desayuno Americano $10000 (Dunells)
+             </li>
+             <li  class="titulo amarillo">
+                Pizza $200 (Estacion Margus)
+             </li>
+        </ul>
+        
+    </div>
+  </div> 
+  <div>
+    <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
+        <ul>
+            <li  class="titulo amarillo">
+                Medialuna $200
+            </li>
+            <li  class="titulo blanco">
+                Cafe + Tostados $3000
+            </li>
+            <li class="titulo amarillo">
+                Combo desayuno $7000
+            </li>
+            <li  class="titulo blanco">
+                Tostadas de campo + Cafe $5000
+             </li>
+             <li  class="titulo amarillo">
+                Exprimido + Tostados $400
+             </li>
+             <li  class="titulo blanco">
+                Cheeseecake $500
+             </li>
+             <li  class="titulo amarillo">
+                Fosforitos $200
+             </li>
+        </ul>
+        
+    </div>
+  </div> 
+</div>

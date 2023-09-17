@@ -1,6 +1,9 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
 }
+.fondo{
+    background-color: #feefc6;
+}
 .imagen{
     width: 640px;
     height: 420px;
@@ -12,11 +15,7 @@
 .titulocafe {
     margin-left: 250px;
 }
-.boton{
-    position: absolute;
-    top: 15%;
-    right: 20%;
-}
+
 .container{
     margin-left: 60px;
     float:left;
@@ -32,7 +31,7 @@
     margin: 0px;
     width: 645px;
     height: 60px;
-    background-color: #fff7e5;
+    background-color: #feefc6;
     position: absolute;
 } 
 .barra{
@@ -77,5 +76,8 @@ li{
     background-color: #FFF;
 }
 .titulo{
-    font-size: 25px;
+    font-size: 20px;
+}
+.menu{
+    text-align: center;
 }
