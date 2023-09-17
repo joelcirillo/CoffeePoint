@@ -12,6 +12,11 @@
 .titulocafe {
     margin-left: 250px;
 }
+.boton{
+    position: absolute;
+    top: 15%;
+    right: 20%;
+}
 .container{
     margin-left: 60px;
     float:left;
