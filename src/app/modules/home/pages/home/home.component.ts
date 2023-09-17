@@ -12,5 +12,9 @@ export class HomeComponent{
     this.ocultarImagen=false;
 
   }
+  volver(){
+     this.ocultarComponente = false; // Ocultar el componente
+    this.ocultarImagen=true;
+  }
   
 }

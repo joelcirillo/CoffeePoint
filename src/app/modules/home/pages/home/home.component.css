@@ -1,7 +1,17 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
 }
+.imagen{
+    width: 640px;
+    height: 420px;
+    margin-left: 80px;
+    
 
+    position: relative;
+}
+.titulocafe {
+    margin-left: 250px;
+}
 .container{
     margin-left: 60px;
     float:left;
