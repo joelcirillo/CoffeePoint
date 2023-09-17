@@ -12,6 +12,7 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 
  const routes:Routes=[
@@ -19,7 +20,7 @@ import { SharedModule } from './shared/shared.module';
  ]
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -30,7 +31,8 @@ import { SharedModule } from './shared/shared.module';
     //llamando modulos firebase,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    CommonModule
   ],
   exports:[
     RouterModule,

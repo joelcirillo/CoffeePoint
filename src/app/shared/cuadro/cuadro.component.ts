@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./cuadro.component.css']
 })
 export class CuadroComponent {
+ 
 
 }

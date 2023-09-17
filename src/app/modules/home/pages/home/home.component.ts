@@ -1,18 +1,16 @@
-import { Component, OnInit} from '@angular/core';
-import * as L from 'leaflet';
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-  constructor() {}
+export class HomeComponent{
+  ocultarComponente: boolean = false;
+  esconderComponente() {
+    this.ocultarComponente = true; // Ocultar el componente
 
-  ngOnInit(): void {
-    const myMap = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-    }).addTo(myMap);
   }
-
+  mostrarComponente() {
+    this.ocultarComponente = false; // Mostrar el componente
+  }
 }

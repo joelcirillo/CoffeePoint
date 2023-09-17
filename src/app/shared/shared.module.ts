@@ -4,6 +4,8 @@ import { CuadroComponent } from './cuadro/cuadro.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LugarComponent } from './lugar/lugar.component';
+
 
 
 
@@ -11,7 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [
     CuadroComponent,
     MapaComponent,
-    NavbarComponent
+    NavbarComponent,
+    LugarComponent
   ],
   imports: [
     AppRoutingModule,
@@ -20,7 +23,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   exports:[
     CuadroComponent,
     MapaComponent,
-    NavbarComponent
+    NavbarComponent,
+    LugarComponent
   ]
 })
 export class SharedModule { }
