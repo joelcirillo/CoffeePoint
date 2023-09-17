@@ -15,7 +15,11 @@
 .titulocafe {
     margin-left: 250px;
 }
-
+.boton{
+    
+    margin-right: 155px;
+    text-align: center;
+}
 .container{
     margin-left: 60px;
     float:left;
@@ -77,6 +81,9 @@ li{
 }
 .titulo{
     font-size: 20px;
+}
+.titulo:hover{
+    font-weight: bolder;
 }
 .menu{
     text-align: center;
