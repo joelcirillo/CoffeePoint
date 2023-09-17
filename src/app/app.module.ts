@@ -38,7 +38,7 @@ import { CommonModule } from '@angular/common';
   exports:[
     RouterModule,
   ],
-  providers: [CambiarmapaService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
