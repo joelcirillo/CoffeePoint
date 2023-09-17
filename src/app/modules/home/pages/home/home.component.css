@@ -72,6 +72,7 @@ li{
     padding-left: 15px;
     padding-top: 35px;
     height: 96px;
+    
 }
 .amarillo{
     background-color: #feefc6;
@@ -84,6 +85,12 @@ li{
 }
 .titulo:hover{
     font-weight: bolder;
+}
+.subtitulo{
+    
+    padding: 0;
+    height: 20px;
+    text-align: center;
 }
 .menu{
     text-align: center;
