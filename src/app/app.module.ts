@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent
+
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -37,7 +38,7 @@ import { CommonModule } from '@angular/common';
   exports:[
     RouterModule,
   ],
-  providers: [],
+  providers: [CambiarmapaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

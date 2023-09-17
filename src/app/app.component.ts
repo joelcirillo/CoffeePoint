@@ -12,6 +12,10 @@ export class AppComponent {
 
   cambiarMapa() {
     // Navegar a la ruta del nuevo componente
+<<<<<<< HEAD
     this.router.navigate(['/home']);
+=======
+    this.router.navigate(['/lugar']);
+>>>>>>> 58f6084a9eade26ddec63a38ea7e4c5e6962c4dd
   }
 }

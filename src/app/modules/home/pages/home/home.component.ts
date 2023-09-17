@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent{
   ocultarComponente: boolean = false;
+  ocultarImagen:boolean=true;
   esconderComponente() {
     this.ocultarComponente = true; // Ocultar el componente
+    this.ocultarImagen=false;
 
   }
-  mostrarComponente() {
-    this.ocultarComponente = false; // Mostrar el componente
-  }
+  
 }
