@@ -13,11 +13,18 @@ export class HomeComponent{
   ocultarCafe:boolean=false;
   ocultarBotonMenuGeneral:boolean=false;
   ocultarBotonMenuPersonal:boolean=true;
+  ocultarBotonResenas:boolean=true;
+  ocultarResenas:boolean=true;
+  //primera cafeteria
   mostrarCafeteria() {
     this.ocultarComponente = true; // Ocultar el componente
     this.ocultarImagen=false;
     this.ocultarBotonMenuGeneral = true;
     this.ocultarBotonMenuPersonal = false;
+    this.ocultarBotonResenas= true;
+    this.ocultarBotonResenas= false; //unico dejar
+    
+    this.ocultarResenas= true;
 
   }
   volver(){
@@ -28,8 +35,12 @@ export class HomeComponent{
     this.ocultarMenuPersonal= true;
     this.ocultarBotonMenuPersonal=true;
     this.ocultarBotonMenuGeneral=false;
+    this.ocultarBotonResenas= true;
+    this.ocultarResenas= true;
+    this.ocultarBotonResenas= true;
   }
   mostrarMenuGeneral(){
+    this.ocultarBotonResenas= true;
     this.ocultarComponente = false; // Ocultar el componente principal
   this.ocultarImagen = true; // Mostrar la imagen de volver
 
@@ -37,6 +48,8 @@ export class HomeComponent{
   this.ocultarCafe = false;
   this.ocultarMenuGeneral = false;
   this.ocultarMenuPersonal = true;
+  this.ocultarBotonResenas= true;
+  this.ocultarResenas= true;
     
   }
   mostrarMenuPersonal(){
@@ -47,9 +60,12 @@ export class HomeComponent{
   this.ocultarCafe = true;
   this.ocultarMenuGeneral = true;
   this.ocultarMenuPersonal = false;
+  this.ocultarResenas= true;
+  
     
   }
   mostrarCafeterias(){
+    this.ocultarBotonResenas= true;
     this.ocultarComponente = false;
     this.ocultarMenuGeneral = true;
     this.ocultarCafe = false;
@@ -57,7 +73,18 @@ export class HomeComponent{
     this.ocultarMenuPersonal= true;
     this.ocultarBotonMenuPersonal=true;
     this.ocultarBotonMenuGeneral=false;
+    this.ocultarResenas= true;
   }
-
+  mostrarResenas(){
+    this.ocultarComponente = true; 
+  this.ocultarImagen = false; 
+  this.ocultarCafe = true;
+  this.ocultarMenuGeneral = true;
+  this.ocultarMenuPersonal = true;
+  this.ocultarResenas= false;
+  
+    
+  }
+  
   
 }
