@@ -98,9 +98,10 @@ li{
 .numero{
     font-size: 90px;
     color: #000;
+    margin-bottom: 0px;
 }
 .resenatitulo{
-    height: 200px;
+    height: 230px;
 }
 /*@media (max-width: 768px) {
     .cuadro {
