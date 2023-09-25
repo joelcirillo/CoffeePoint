@@ -113,7 +113,13 @@ li{
 }
 .resenablanco{
     background-color: #FFF;
-    height: 200px;
+    height: 230px;
+}
+.like{
+    float: right;
+    height: 25px;
+    margin-left: 20px;
+    margin-right: 10px
 }
 /*@media (max-width: 768px) {
     .cuadro {
