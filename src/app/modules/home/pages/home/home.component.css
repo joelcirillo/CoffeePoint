@@ -103,6 +103,18 @@ li{
 .resenatitulo{
     height: 230px;
 }
+.nombreresena{
+    font-size: 25px;
+    text-align: left;
+}
+.resena2{
+
+    font-size: 20px;
+}
+.resenablanco{
+    background-color: #FFF;
+    height: 200px;
+}
 /*@media (max-width: 768px) {
     .cuadro {
         margin-right: 0; 
