@@ -13,20 +13,21 @@ import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
-
+import { AuthModule } from './modules/auth/auth.module';
 
  const routes:Routes=[
   {path:'home', component:HomeComponent},
  ]
 @NgModule({
   declarations: [
-    AppComponent
-
+    AppComponent,
+    HomeComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
+    AuthModule
     //llamamos al shared module
     SharedModule,
     //llamando modulos firebase,
