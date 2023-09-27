@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { CuadroComponent } from './cuadro/cuadro.component';
+import { MapaComponent } from './mapa/mapa.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LugarComponent } from './lugar/lugar.component';
 
 
 
@@ -15,7 +17,17 @@ import { AppRoutingModule } from '../app-routing.module';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CuadroComponent,
+    MapaComponent,
+    NavbarComponent,
+    LugarComponent
+  ],
+  exports:[
+    CuadroComponent,
+    MapaComponent,
+    NavbarComponent,
+    LugarComponent
   ]
 })
 export class SharedModule { }
