@@ -1,0 +1,25 @@
+*{
+    font-family: 'Josefin Sans', sans-serif;
+}
+.container{
+    margin-left: 60px;
+    float:left;
+
+    position: relative;
+   
+}
+.container h2{
+    color: #893920;
+    
+    text-align: center;
+    padding-top: 20px;
+    margin: 0px;
+    width: 645px;
+    height: 60px;
+    background-color: #fff7e5;
+    position: absolute;
+}
+.barra{
+    margin-left: 140px;
+    position: relative;
+}
