@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PagesComponent } from './modules/reseña/pages/pages.component';
 
 const routes: Routes = [
 
   {
-    path:"*",component:PagesComponent
-  }
+    path:"" ,loadChildren:()=>import('./modules/reseña/reseña.module').then( m  => m.ReseñaModule )
+   }
 
 
  

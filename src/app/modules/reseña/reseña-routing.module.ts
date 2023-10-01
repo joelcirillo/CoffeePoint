@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { PagesComponent } from './pages/pages.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [
+
   {
-    path:'pages',component:PagesComponent
+    path:"",component: PagesComponent
   }
 
 ]
