@@ -9,25 +9,24 @@ import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth"; 
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
-import {  } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { AuthModule } from './modules/auth/auth.module';
+// import { AuthModule } from './modules/auth/auth.module';
 
- const routes:Routes=[
-  {path:'home', component:HomeComponent},
- ]
+ //const routes:Routes=[
+ // {path:'home', component:HomeComponent},
+ //]
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    // HomeComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    // RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    // AuthModule,
     //llamamos al shared module
     SharedModule,
     //llamando modulos firebase,

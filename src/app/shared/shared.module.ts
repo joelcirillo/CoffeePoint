@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedRoutingModule } from './shared-routing.module';
 import { CuadroComponent } from './cuadro/cuadro.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { AppRoutingModule } from '../app-routing.module';
@@ -12,16 +11,15 @@ import { LugarComponent } from './lugar/lugar.component';
 
 @NgModule({
   declarations: [
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedRoutingModule,
-    AppRoutingModule,
+    NavbarComponent,
     CuadroComponent,
     MapaComponent,
     NavbarComponent,
     LugarComponent
+  ],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
   ],
   exports:[
     CuadroComponent,
