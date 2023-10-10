@@ -2,11 +2,11 @@
     border: 10px double;
     border-radius:20px; 
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    height: 700px;
+    height: 550px;
     color: #893920;
     
 }
@@ -17,7 +17,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 2000px;
-    height: 450px;
+    height: 389px;
     font-family: 'Josefin Sans', sans-serif;
     border: none;
       

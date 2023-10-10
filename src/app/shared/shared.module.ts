@@ -6,6 +6,7 @@ import { MapaComponent } from './mapa/mapa.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LugarComponent } from './lugar/lugar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -15,7 +16,8 @@ import { LugarComponent } from './lugar/lugar.component';
     CuadroComponent,
     MapaComponent,
     NavbarComponent,
-    LugarComponent
+    LugarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { LugarComponent } from './lugar/lugar.component';
     CuadroComponent,
     MapaComponent,
     NavbarComponent,
-    LugarComponent
+    LugarComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }
