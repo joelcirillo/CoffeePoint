@@ -125,6 +125,10 @@ li{
     margin-left: 20px;
     margin-right: 10px
 }
+.info{
+    padding: 10px;
+    margin: 10px;
+}
 /*@media (max-width: 768px) {
     .cuadro {
         margin-right: 0; 
