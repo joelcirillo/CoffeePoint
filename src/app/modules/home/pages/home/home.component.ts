@@ -99,6 +99,26 @@ export class HomeComponent {
 
 
   }
+  //funcion de agregar ela cafeteria
+  async agregarCafeteria(){
+    if (this.cafeteria.valid){
+      let nuevaCafeteria: Cafeteria = {
+        idCafeteria: '', // único que guardamos vacío; lo creamos en el CRUD
+        direccion: this.cafeteria.value.direccion!,
+        nombre: this.cafeteria.value.nombre!,
+        imagen: this.cafeteria.value.imagen!,
+        descripcion: this.cafeteria.value.descripcion!,
+      };
 
+      // ENVIAMOS NUESTRO NUEVO PRODUCTO
+      await this.servicioCrud.crearCafeteria(nuevaCafeteria)
+      .then(producto => {
+        alert("Ha agregado un nuevo producto con éxito :)");
+      })
+      .catch(error => {
+        alert("Hubo un error al cargar el nuevo producto :( \n"+error);
+      })
+    }
+  }
 
 }
