@@ -1,11 +1,24 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Cafeteria } from "../../../../models/cafeteria";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  coleccionCafeteria: Cafeteria[] = [];
+
+  cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
+
+  modalVisibleProducto: boolean = false;
+   // ENLAZA NUESTRO FORMULARIO
+  cafeteria = new FormGroup({
+    nombre: new FormControl('',Validators.required),
+    imagen: new FormControl('',Validators.required),
+    descripcion: new FormControl('',Validators.required),
+    direccion: new FormControl('',Validators.required)
+  })
   //definir que mostrar y que no
   ocultarComponente: boolean = false;
   ocultarImagen: boolean = true;
