@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
+import { CrudService } from '../../service/crud.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -99,6 +100,11 @@ export class HomeComponent {
 
 
   }
+
+  constructor(
+    // llamamos servicio Crud
+    public servicioCrud: CrudService
+  ){}
   //funcion de agregar ela cafeteria
   async agregarCafeteria(){
     if (this.cafeteria.valid){
@@ -112,7 +118,7 @@ export class HomeComponent {
 
       // ENVIAMOS NUESTRO NUEVO PRODUCTO
       await this.servicioCrud.crearCafeteria(nuevaCafeteria)
-      .then(producto => {
+      .then(cafeteria => {
         alert("Ha agregado un nuevo producto con éxito :)");
       })
       .catch(error => {
