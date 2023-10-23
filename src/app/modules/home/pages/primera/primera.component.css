@@ -26,6 +26,23 @@ a{
     font-size: 30px;
     color: #FFF;
 }
+.boton1 {
+    text-decoration: underline;
+    border-radius: 10px;
+    border: 2px solid white; /* Borde blanco de 2 píxeles */
+    background: transparent; /* Fondo transparente */
+    color: white; /* Color del texto en el botón */
+    padding: 10px 20px; /* Añade un relleno al botón */
+    font-size: 25px; /* Tamaño de la fuente del texto */
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Estilos adicionales para resaltar el botón al pasar el mouse sobre él */
+.boton1:hover {
+    transition: 1s;
+    background: white; /* Cambia el fondo a blanco al pasar el mouse sobre el botón */
+    color: black; /* Cambia el color del texto a negro al pasar el mouse sobre el botón */
+}
 /* .texto-superpuesto {
     position: absolute;
     top: 50%; /* Ajusta la posición vertical según tus preferencias 
