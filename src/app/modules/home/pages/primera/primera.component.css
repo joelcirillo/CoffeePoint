@@ -1,0 +1,54 @@
+body{
+    position: relative;
+    background-image: url('../../../../../assets/presentacion.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+}
+h1{
+    padding-top: 100px;
+    text-align: center;
+    color: #FFF;
+    font-family: 'Inknut Antiqua', serif;  
+}
+p{
+    padding-top: 50px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    color: #FFF;
+    font-weight: lighter;
+    padding-bottom: 120px;
+}
+a{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    color: #FFF;
+}
+.boton1 {
+    text-decoration: underline;
+    border-radius: 10px;
+    border: 2px solid white; /* Borde blanco de 2 píxeles */
+    background: transparent; /* Fondo transparente */
+    color: white; /* Color del texto en el botón */
+    padding: 10px 20px; /* Añade un relleno al botón */
+    font-size: 25px; /* Tamaño de la fuente del texto */
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Estilos adicionales para resaltar el botón al pasar el mouse sobre él */
+.boton1:hover {
+    transition: 1s;
+    background: white; /* Cambia el fondo a blanco al pasar el mouse sobre el botón */
+    color: black; /* Cambia el color del texto a negro al pasar el mouse sobre el botón */
+}
+/* .texto-superpuesto {
+    position: absolute;
+    top: 50%; /* Ajusta la posición vertical según tus preferencias 
+    left: 50%; /* Ajusta la posición horizontal según tus preferencias 
+    transform: translate(-50%, -50%); /* Centra el texto en el centro del contenedor 
+    color: #fff; /* Color del texto 
+    padding: 10px; /* Espaciado alrededor del texto
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen 
+} */

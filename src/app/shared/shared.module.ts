@@ -1,33 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedRoutingModule } from './shared-routing.module';
 import { CuadroComponent } from './cuadro/cuadro.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LugarComponent } from './lugar/lugar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedRoutingModule,
-    AppRoutingModule,
+    NavbarComponent,
     CuadroComponent,
     MapaComponent,
     NavbarComponent,
-    LugarComponent
+    LugarComponent,
+    FooterComponent
+  ],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
   ],
   exports:[
     CuadroComponent,
     MapaComponent,
     NavbarComponent,
-    LugarComponent
+    LugarComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

@@ -7,7 +7,7 @@ const routes: Routes = [
   path:"",component:HomeComponent
 },
 {
-  path:"auth",loadChildren:()=>import('./modules/auth/auth.module').then(m=>m.AuthModule)
+  path:"",loadChildren:()=>import('./modules/auth/auth.module').then(m=>m.AuthModule)
 },
 {
   path:"",loadChildren:()=>import('./modules/home/home.module').then(m=>m.HomeModule)
@@ -15,9 +15,6 @@ const routes: Routes = [
 {
   path:"",loadChildren:()=>import('./modules/nosotros/nosotros.module').then(m=>m.NosotrosModule)
 },
-{
-  path:"",loadChildren:()=>import('./shared/shared.module').then(m=>m.SharedModule)
-}
 ];
 
 @NgModule({

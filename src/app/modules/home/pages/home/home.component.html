@@ -2,18 +2,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
 <div class="fondo">
-<button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menús</button><button type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menú</button>    <button type="button" [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Reseñas</button><button type="button" (click)="mostrarCafeterias()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Cafeterías</button>
-<div class="container" [hidden]="ocultarComponente" >
+<button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Populares</button><button type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menú</button>    <button type="button" [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Reseñas</button><button type="button" (click)="mostrarCafeterias()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Cafeterías</button>
+<!-- nuevo mapa -->
+<div id="map" style="height: 460px; width: 680px;"></div>
+<!-- <div class="container" [hidden]="ocultarComponente" >
         <div class="coffee">
             <h2>- Busca tu cafetería aquí -</h2>
         </div>
         <iframe src="https://www.google.com/maps/d/embed?mid=1A6nvf0XyTlJXBZAFXXEPUypZBSIDNk4&ehbc=2E312F" width="640" height="480"></iframe>
     </div>
-<div>
+<div> -->
     <img src="../../../../../assets/volver.png" [hidden]="ocultarImagen" (click)="volver()" alt="" style="height: 40px; margin-left: 80px;" srcset="">
     <h2 class="titulocafe" [hidden]="ocultarImagen">- Pepito Cafeteria -</h2>
     
     <img src="../../../assets/1946" [hidden]="ocultarImagen" class="imagen" alt="">
+   <p [hidden]="ocultarImagen" style="margin-left: 80px; font-size: 17px;">
+    Horario: lunes a domingo de 7:30 a 21:00. <br>
+    Teléfono: 02994777790. <br>
+    http://www.estacionmargus.com.ar/
+   </p>
 </div>
 
 
@@ -155,13 +162,13 @@
             <li  class="resenablanco">
                 <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Martin Ibañez</h3>
                 <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 4 días</p>
-                <p class="resena2">No pueden haber subido tanto los precios de la ultima vez que fui, terrible!</p>
+                <p class="resena2">No pueden haber subido tanto los precios de la ultima vez que fui</p>
                 <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
             </li>
             <li  class="resenaamarillo">
                 <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Martina Silva</h3>
                 <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 1 año</p>
-                <p class="resena2">Fui con amigas, linda tarde compartida, increible la variedad del menu</p>
+                <p class="resena2">Fui con amigas, linda tarde compartida, increible la variedad </p>
                 <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
             </li>
         </ul>
@@ -169,4 +176,46 @@
     </div>
     
   </div> 
+  <button type="button" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;" data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
+    Agregar Cafetería
+</button>
+<div class="modal fade" id="agregarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="cafeteria" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese nombre de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese dirección:</label>
+                    <input type="text" class="form-control" formControlName="direccion" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese una imagen de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="imagen" placeholder="...">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Ingrese descripción:</label>
+                    <input type="text" class="form-control" formControlName="descripcion" placeholder="...">
+                </div>
+               
+            </div>
+
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                    (click)="agregarCafeteria()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
 </div>

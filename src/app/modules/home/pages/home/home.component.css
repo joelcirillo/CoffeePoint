@@ -17,7 +17,7 @@
 }
 .boton{
     
-    margin-right: 155px;
+    margin-right: 140px;
     text-align: center;
 }
 .container{
@@ -125,6 +125,9 @@ li{
     margin-left: 20px;
     margin-right: 10px
 }
+/* se agregan estilos de leaflet*/
+@import '~leaflet/dist/leaflet.css';
+
 /*@media (max-width: 768px) {
     .cuadro {
         margin-right: 0; 
