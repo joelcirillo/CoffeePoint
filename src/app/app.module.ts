@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    CommonModule
+    CommonModule,
   ],
   exports:[
     RouterModule,

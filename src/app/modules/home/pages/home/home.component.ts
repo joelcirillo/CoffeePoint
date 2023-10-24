@@ -2,7 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
+//leaflet
 import * as L from 'leaflet';
+import { latLng, tileLayer, marker, icon } from 'leaflet';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +13,25 @@ import * as L from 'leaflet';
 })
 export class HomeComponent implements AfterViewInit {
   //icono personalizado del leaflet
+
+  private initMap(): void {
+    let myIcon = L.icon({
+        iconUrl: 'assets/custom-icon.png', // Ruta a tu imagen personalizada en la carpeta de assets
+        iconSize: [38, 95], // Tamaño del icono
+        iconAnchor: [22, 94], // Punto de anclaje del icono
+        popupAnchor: [-3, -76] // Punto donde aparecerá el popup en relación con el icono
+    });
+
+    let map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    L.marker([51.5, -0.09], {icon: myIcon}).addTo(map);
+  }
+  
   //mapa leaflet
   ngAfterViewInit(): void {
     this.initializeMap();
