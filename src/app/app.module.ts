@@ -23,7 +23,12 @@ import { HomeComponent } from './modules/home/pages/home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-  
+    //importar componentes globales
+    SharedModule,
+    //modulos de firebase
+    AngularFireModule.initializeApp(environment.firebaseConfig), //inicializa firebase 
+    AngularFireAuthModule,
+    AngularFireStorageModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
