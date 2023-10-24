@@ -6,38 +6,24 @@ import { AppComponent } from './app.component';
 //se importa el environment
 import { environment } from "src/environments/environment";
 //se importa modulos de firebase
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule } from "@angular/fire/compat/auth"; 
-import { AngularFireStorageModule } from "@angular/fire/compat/storage";
-import {  } from '@angular/router';
-import { HomeComponent } from './modules/home/pages/home/home.component';
+import {AngularFireModule} from'@angular/fire/compat'; //importacion del firebase (base de datos de la nube)
+import {AngularFireAuthModule} from'@angular/fire/compat/auth'; //importacion de la autentificacion 
+import {AngularFireStorageModule} from'@angular/fire/compat/storage'; //importacion del storage (img)
 import { SharedModule } from './shared/shared.module';
-import { CommonModule } from '@angular/common';
-import { AuthModule } from './modules/auth/auth.module';
 
- const routes:Routes=[
-  {path:'home', component:HomeComponent},
- ]
+import { HomeComponent } from './modules/home/pages/home/home.component';
 @NgModule({
+
   declarations: [
     AppComponent,
     HomeComponent,
   ],
+
+
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
-    AuthModule
-    //llamamos al shared module
-    SharedModule,
-    //llamando modulos firebase,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFireStorageModule,
-    CommonModule
-  ],
-  exports:[
-    RouterModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
