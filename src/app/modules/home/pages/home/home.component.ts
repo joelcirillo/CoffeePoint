@@ -1,13 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
+import * as L from 'leaflet';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
+  //icono personalizado del leaflet
+  //mapa leaflet
+  ngAfterViewInit(): void {
+    this.initializeMap();
+  }
+  private initializeMap(): void {
+    const map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([51.5, -0.09]).addTo(map)
+      .bindPopup('¡Hola, este es un marcador de ejemplo!')
+      .openPopup();
+  }
   coleccionCafeteria: Cafeteria[] = [];
 
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos

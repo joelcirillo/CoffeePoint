@@ -125,6 +125,8 @@ li{
     margin-left: 20px;
     margin-right: 10px
 }
+/* se agregan estilos de leaflet*/
+@import '~leaflet/dist/leaflet.css';
 
 /*@media (max-width: 768px) {
     .cuadro {
