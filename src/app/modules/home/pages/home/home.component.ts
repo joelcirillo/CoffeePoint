@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
 //leaflet
@@ -16,10 +16,10 @@ export class HomeComponent implements AfterViewInit {
 
   private initMap(): void {
     let myIcon = L.icon({
-        iconUrl: 'assets/custom-icon.png', // Ruta a tu imagen personalizada en la carpeta de assets
-        iconSize: [38, 95], // Tamaño del icono
-        iconAnchor: [22, 94], // Punto de anclaje del icono
-        popupAnchor: [-3, -76] // Punto donde aparecerá el popup en relación con el icono
+      iconUrl: 'assets/custom-icon.png', // Ruta a tu imagen personalizada en la carpeta de assets
+      iconSize: [38, 95], // Tamaño del icono
+      iconAnchor: [22, 94], // Punto de anclaje del icono
+      popupAnchor: [-3, -76] // Punto donde aparecerá el popup en relación con el icono
     });
 
     let map = L.map('map').setView([51.505, -0.09], 13);
@@ -29,9 +29,9 @@ export class HomeComponent implements AfterViewInit {
       maxZoom: 18,
     }).addTo(map);
 
-    L.marker([51.5, -0.09], {icon: myIcon}).addTo(map);
+    L.marker([51.5, -0.09], { icon: myIcon }).addTo(map);
   }
-  
+
   //mapa leaflet
   ngAfterViewInit(): void {
     this.initializeMap();
@@ -52,12 +52,12 @@ export class HomeComponent implements AfterViewInit {
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
 
   modalVisibleProducto: boolean = false;
-   // ENLAZA NUESTRO FORMULARIO
+  // ENLAZA NUESTRO FORMULARIO
   cafeteria = new FormGroup({
-    nombre: new FormControl('',Validators.required),
-    imagen: new FormControl('',Validators.required),
-    descripcion: new FormControl('',Validators.required),
-    direccion: new FormControl('',Validators.required)
+    nombre: new FormControl('', Validators.required),
+    imagen: new FormControl('', Validators.required),
+    descripcion: new FormControl('', Validators.required),
+    direccion: new FormControl('', Validators.required)
   })
   //definir que mostrar y que no
   ocultarComponente: boolean = false;
@@ -139,14 +139,36 @@ export class HomeComponent implements AfterViewInit {
 
 
   }
+  // cafeteria: FormGroup;
+
+  // constructor(private formBuilder: FormBuilder, private cafeteriaService: CrudService) {
+  //   this.cafeteria = this.formBuilder.group({
+  //     nombre: '',
+  //     direccion: '',
+  //     imagen: '',
+  //     descripcion: ''
+  //   });
+  // }
+
+  // // Método para agregar la cafetería a la base de datos
+  // agregarCafeteria() {
+  //   const newCafeteria = this.cafeteria.value;
+  //   this.cafeteriaService.addCafeteria(newCafeteria)
+  //     .then(() => {
+  //       console.log('Cafetería agregada exitosamente');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error al agregar cafetería: ', error);
+  //     });
+  // }
 
   constructor(
     // llamamos servicio Crud
     public servicioCrud: CrudService
-  ){}
+  ) { }
   //funcion de agregar ela cafeteria
-  async agregarCafeteria(){
-    if (this.cafeteria.valid){
+  async agregarCafeteria() {
+    if (this.cafeteria.valid) {
       let nuevaCafeteria: Cafeteria = {
         idCafeteria: '', // único que guardamos vacío; lo creamos en el CRUD
         direccion: this.cafeteria.value.direccion!,
@@ -157,12 +179,12 @@ export class HomeComponent implements AfterViewInit {
 
       // ENVIAMOS NUESTRO NUEVO PRODUCTO
       await this.servicioCrud.crearCafeteria(nuevaCafeteria)
-      .then(cafeteria => {
-        alert("Ha agregado un nuevo producto con éxito :)");
-      })
-      .catch(error => {
-        alert("Hubo un error al cargar el nuevo producto :( \n"+error);
-      })
+        .then(cafeteria => {
+          alert("Ha agregado un nuevo producto con éxito :)");
+        })
+        .catch(error => {
+          alert("Hubo un error al cargar el nuevo producto :( \n" + error);
+        })
     }
   }
 

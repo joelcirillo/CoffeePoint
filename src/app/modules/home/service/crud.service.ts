@@ -6,21 +6,31 @@ import { Cafeteria } from 'src/app/models/cafeteria';
   providedIn: 'root'
 })
 export class CrudService {
+  // private coleccion: AngularFirestoreCollection<Cafeteria>
+
+  // constructor(private database: AngularFirestore) { 
+  //   //addCafeteria(cafeteria: any) {
+  //     this.firestore.collection('cafeterias').add(cafeteria);
+  //   //}
+  // }
+
+  // Método para agregar una cafetería a la base de datos
+
   private cafeteriaColeccion: AngularFirestoreCollection<Cafeteria>
   constructor(private database: AngularFirestore) {
     this.cafeteriaColeccion = database.collection('cafeterias')
-   }
-   // función para CREAR PRODUCTO
-  crearCafeteria(cafeteria: Cafeteria){
-    return new Promise(async(resolve, reject) =>{
-      try{
+  }
+  // función para CREAR PRODUCTO
+  crearCafeteria(cafeteria: Cafeteria) {
+    return new Promise(async (resolve, reject) => {
+      try {
         const id = this.database.createId();
         cafeteria.idCafeteria = id;
 
         const resultado = await this.cafeteriaColeccion.doc(id).set(cafeteria);
 
         resolve(resultado);
-      } catch (error){
+      } catch (error) {
         reject(error);
       }
     })
