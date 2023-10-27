@@ -187,5 +187,17 @@ export class HomeComponent implements AfterViewInit {
         })
     }
   }
+  mostrarEditar(cafeteriaSeleccionada:Cafeteria){
+    this.cafeteriaSeleccionada= cafeteriaSeleccionada;
+    this.cafeteria.setValue({
+      nombre:cafeteriaSeleccionada.nombre,
+      imagen:cafeteriaSeleccionada.imagen,
+      descripcion:cafeteriaSeleccionada.descripcion,
+      direccion:cafeteriaSeleccionada.direccion,
+
+    })
+    
+
+  }
 
 }
