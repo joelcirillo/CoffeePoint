@@ -38,7 +38,7 @@
             {{col.nombre}}
             <p class="subtitulo amarillo">{{col.direccion}}</p>
             <button type="button" title="Editar" data-bs-dismiss="modal" class="btn btn-outline-success"
-            (click)="mostrarEditar" data-bs-toggle="modal"
+            (click)="mostrarEditar(col)" data-bs-toggle="modal"
             data-bs-target="#editarProducto">Editar</button>
         <button type="button" title="Eliminar" data-bs-dismiss="modal" class="btn btn-outline-danger"
             data-bs-toggle="modal" data-bs-target="#eliminarProducto"
