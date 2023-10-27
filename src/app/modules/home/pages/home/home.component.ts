@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
+import { MatIconModule } from '@angular/material/icon';
 //leaflet
 import * as L from 'leaflet';
 import { latLng, tileLayer, marker, icon } from 'leaflet';
@@ -166,6 +167,21 @@ export class HomeComponent implements AfterViewInit {
     // llamamos servicio Crud
     public servicioCrud: CrudService
   ) { }
+  ngOnInit() {
+    this.obtenerCafeterias();
+  }
+
+  obtenerCafeterias() {
+    this.servicioCrud.obtenerCafeterias().subscribe(
+      (cafeterias: any[]) => {
+        this.coleccionCafeteria = cafeterias;
+      },
+      (error) => {
+        console.error('Error al obtener cafeterías: ', error);
+      }
+    );
+  }
+
   //funcion de agregar ela cafeteria
   async agregarCafeteria() {
     if (this.cafeteria.valid) {
@@ -187,6 +203,7 @@ export class HomeComponent implements AfterViewInit {
         })
     }
   }
+  //mostrar botones
   mostrarEditar(cafeteriaSeleccionada:Cafeteria){
     this.cafeteriaSeleccionada= cafeteriaSeleccionada;
     this.cafeteria.setValue({
@@ -198,6 +215,26 @@ export class HomeComponent implements AfterViewInit {
     })
     
 
+  }
+  mostrarBorrar(cafeteriaSeleccionada:Cafeteria){ //mostrar
+    this.modalVisibleProducto= true;
+    this.cafeteriaSeleccionada=this.cafeteriaSeleccionada;
+  }
+  editarProducto(){
+    let datos: Cafeteria = {
+      idCafeteria: this.cafeteriaSeleccionada.idCafeteria,
+      nombre: this.cafeteria.value.nombre!,
+      imagen: this.cafeteria.value.imagen!,
+      descripcion: this.cafeteria.value.descripcion!,
+      direccion: this.cafeteria.value.direccion!
+    }
+    this.servicioCrud.modificarCafeteria(this.cafeteriaSeleccionada.idCafeteria, datos)
+    .then(cafeteria=>{
+      alert("el producto fue modificado con exito.");
+    })
+    .catch(error=>{
+      alert("No se pudo modificar el producto \n"+error)
+    })
   }
 
 }

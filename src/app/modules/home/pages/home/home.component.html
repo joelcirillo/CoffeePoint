@@ -32,9 +32,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
  <div>
-  <div [hidden]="ocultarCafe" class="cuadro">
+  <div [hidden]="ocultarCafe" scope="col" class="cuadro">
       <ul>
-          <li (click)="mostrarCafeteria()" class="titulo amarillo">
+        <li *ngFor="let col of coleccionCafeteria"  class="titulo amarillo">
+            {{col.nombre}}
+            <p class="subtitulo amarillo">{{col.direccion}}</p>
+            <button type="button" title="Editar" data-bs-dismiss="modal" class="btn btn-outline-success"
+            (click)="mostrarEditar" data-bs-toggle="modal"
+            data-bs-target="#editarProducto">Editar</button>
+        <button type="button" title="Eliminar" data-bs-dismiss="modal" class="btn btn-outline-danger"
+            data-bs-toggle="modal" data-bs-target="#eliminarProducto"
+            (click)="mostrarBorrar(col)">Eliminar</button>
+        </li>
+        <li *ngFor="let col of coleccionCafeteria" class="subtitulo amarillo">
+            
+        </li>
+          <!-- <li (click)="mostrarCafeteria()" class="titulo amarillo">
               1- Pepito Cafeteria <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
           </li>
           <li class="subtitulo amarillo"> Yrigoyen 1200</li>
@@ -61,7 +74,7 @@
            <li  class="titulo amarillo">
               7- Plaza Bar <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
            </li>
-           <li  class="subtitulo amarillo">Avenida Alem 210</li>
+           <li  class="subtitulo amarillo">Avenida Alem 210</li> -->
       </ul>
       
   </div>
