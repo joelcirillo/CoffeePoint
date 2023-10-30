@@ -41,9 +41,10 @@
             <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria">
                 Editar
             </button>
-            <button type="button" title="Eliminar" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="mostrarBorrar(col)">
+            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarCafeteria">
                 Eliminar
             </button>
+            
         </li>
         <li *ngFor="let col of coleccionCafeteria" class="subtitulo amarillo">
             
@@ -275,3 +276,24 @@
     </div>
 
 </div>
+<!-- se agrega modal para eliminar -->
+<div class="modal fade" *ngIf="modalVisibleProducto" id="eliminarCafeteria" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar el siguiente producto?
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{cafeteriaSeleccionada.nombre}}
+                    <img src="{{cafeteriaSeleccionada.imagen}}" srcset="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
