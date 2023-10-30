@@ -45,5 +45,16 @@ export class CrudService {
   modificarCafeteria(idCafeteria: string, nuevaData: Cafeteria){
     return this.database.collection('cafeterias').doc(idCafeteria).update(nuevaData)
   }
+  eliminarCafeteria(idCafeteria: string){
+    return new Promise((resolve, reject) => {
+      try{
+        const resp = this.cafeteriaColeccion.doc(idCafeteria).delete()
+        resolve (resp)
+      }
+      catch(error){
+        reject(error)
+      }
+    })
+  }
   
 }

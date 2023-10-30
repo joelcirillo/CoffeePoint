@@ -2,10 +2,13 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
-import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+
 //leaflet
 import * as L from 'leaflet';
 import { latLng, tileLayer, marker, icon } from 'leaflet';
+
 
 @Component({
   selector: 'app-home',
@@ -165,7 +168,8 @@ export class HomeComponent implements AfterViewInit {
 
   constructor(
     // llamamos servicio Crud
-    public servicioCrud: CrudService
+    public servicioCrud: CrudService,
+    public dialog: MatDialog,
   ) { }
   ngOnInit() {
     this.obtenerCafeterias();
@@ -204,23 +208,23 @@ export class HomeComponent implements AfterViewInit {
     }
   }
   //mostrar botones
-  mostrarEditar(cafeteriaSeleccionada:Cafeteria){
-    this.cafeteriaSeleccionada= cafeteriaSeleccionada;
+  mostrarEditar(cafeteriaSeleccionada: Cafeteria) {
+    this.cafeteriaSeleccionada = cafeteriaSeleccionada;
     this.cafeteria.setValue({
-      nombre:cafeteriaSeleccionada.nombre,
-      imagen:cafeteriaSeleccionada.imagen,
-      descripcion:cafeteriaSeleccionada.descripcion,
-      direccion:cafeteriaSeleccionada.direccion,
-
+      nombre: cafeteriaSeleccionada.nombre,
+      imagen: cafeteriaSeleccionada.imagen,
+      descripcion: cafeteriaSeleccionada.descripcion,
+      direccion: cafeteriaSeleccionada.direccion,
     })
-    
+
 
   }
-  mostrarBorrar(cafeteriaSeleccionada:Cafeteria){ //mostrar
-    this.modalVisibleProducto= true;
-    this.cafeteriaSeleccionada=this.cafeteriaSeleccionada;
+  mostrarBorrar(cafeteriaSeleccionada: Cafeteria) { //mostrar
+    this.modalVisibleProducto = true;
+    this.cafeteriaSeleccionada = cafeteriaSeleccionada;
   }
-  editarProducto(){
+  //funcion del editar
+  editarCafeteria(){
     let datos: Cafeteria = {
       idCafeteria: this.cafeteriaSeleccionada.idCafeteria,
       nombre: this.cafeteria.value.nombre!,
@@ -229,12 +233,50 @@ export class HomeComponent implements AfterViewInit {
       direccion: this.cafeteria.value.direccion!
     }
     this.servicioCrud.modificarCafeteria(this.cafeteriaSeleccionada.idCafeteria, datos)
-    .then(cafeteria=>{
+    .then(producto=>{
       alert("el producto fue modificado con exito.");
     })
     .catch(error=>{
       alert("No se pudo modificar el producto \n"+error)
     })
   }
+   borrarCafeteria(){
+    this.servicioCrud.eliminarCafeteria(this.cafeteriaSeleccionada.idCafeteria)
+    .then(respuesta=>{
+      alert("el producto ha sido eliminado correctamente.");
+    })
+    .catch(error=>{
+      alert("no se ha podido eliminar el producto: \n"+error)
+    })
+  }
+ 
+  // openEditModal(): void {
+  //   const dialogRef = this.dialog.open(EditModalComponent, {
+  //     width: '250px', // Personaliza el ancho del modal según tus necesidades
+  //     data: {} // Puedes pasar datos aquí para mostrar en el modal
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log('El modal de edición se cerró con el siguiente resultado:', result);
+  //   });
+  // }
+  // editMode: boolean = false;
+  // editarProducto() {
+  //   this.editMode = true;
+  //   let datos: Cafeteria = {
+  //     idCafeteria: this.cafeteriaSeleccionada.idCafeteria,
+  //     nombre: this.cafeteria.value.nombre!,
+  //     imagen: this.cafeteria.value.imagen!,
+  //     descripcion: this.cafeteria.value.descripcion!,
+  //     direccion: this.cafeteria.value.direccion!
+  //   }
+  //   this.servicioCrud.modificarCafeteria(this.cafeteriaSeleccionada.idCafeteria, datos)
+  //     .then(cafeteria => {
+  //       alert("el producto fue modificado con exito.");
+  //     })
+  //     .catch(error => {
+  //       alert("No se pudo modificar el producto \n" + error)
+  //     })
+  // }
 
 }

@@ -37,16 +37,18 @@
         <li *ngFor="let col of coleccionCafeteria"  class="titulo amarillo">
             {{col.nombre}}
             <p class="subtitulo amarillo">{{col.direccion}}</p>
-            <button type="button" title="Editar" data-bs-dismiss="modal" class="btn btn-outline-success"
-            (click)="mostrarEditar(col)" data-bs-toggle="modal"
-            data-bs-target="#editarProducto">Editar</button>
-        <button type="button" title="Eliminar" data-bs-dismiss="modal" class="btn btn-outline-danger"
-            data-bs-toggle="modal" data-bs-target="#eliminarProducto"
-            (click)="mostrarBorrar(col)">Eliminar</button>
+            
+            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria">
+                Editar
+            </button>
+            <button type="button" title="Eliminar" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="mostrarBorrar(col)">
+                Eliminar
+            </button>
         </li>
         <li *ngFor="let col of coleccionCafeteria" class="subtitulo amarillo">
             
         </li>
+        
           <!-- <li (click)="mostrarCafeteria()" class="titulo amarillo">
               1- Pepito Cafeteria <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
           </li>
@@ -226,6 +228,47 @@
 
                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
                     (click)="agregarCafeteria()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- se agrega modal para editar -->
+<div class="modal fade" id="editarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" *ngFor="let col of coleccionCafeteria">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="cafeteria" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese nombre de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="{{col.nombre}}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese dirección:</label>
+                    <input type="text" class="form-control" formControlName="direccion" placeholder="{{col.direccion}}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese una imagen de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="imagen" placeholder="{{col.imagen}}">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Ingrese descripción:</label>
+                    <input type="text" class="form-control" formControlName="descripcion" placeholder="{{col.descripcion}}">
+                </div>
+               
+            </div>
+
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                    (click)="editarCafeteria()">Guardar</button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
