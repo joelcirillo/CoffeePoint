@@ -17,42 +17,46 @@
         style="background-color:#a55e49 ; color: #FFF; ">Reseñas</button><button type="button"
         (click)="mostrarCafeterias()" class="btn boton"
         style="background-color:#a55e49 ; color: #FFF; ">Cafeterías</button>
-        <div class="input-group input-group-lg barra" style="width: 500px;">
-            <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
-                    style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
-            <input type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-lg">
-                <div [hidden]="ocultarCafe" scope="col" class="cuadro">
-                    <ul>
-                        <li *ngFor="let col of coleccionCafeteria;  let even = even"
-                            [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                            <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria)">{{col.nombre}}</a>
-                            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
-            
-                            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
-                                Editar
-                            </button>
-                            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
-                                Eliminar
-                            </button>
-            
-                        </li>
-            
-            
-                    </ul>
-                 
-                </div>
-                <button type="button" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;"
-                data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
-                Agregar Cafetería
-            </button>
+        <button type="button" class="btn boton" style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
+        data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
+        Agregar Cafetería
+    </button>
+        
+        <div [hidden]="ocultarCafe" scope="col" class="cuadro">
+            <ul>
+                <li *ngFor="let col of coleccionCafeteria;  let even = even"
+                    [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
+                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria)">{{col.nombre}}</a>
+                    <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
+    
+                    <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
+                        Editar
+                    </button>
+                    <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
+                        Eliminar
+                    </button>
+    
+                </li>
+    
+    
+            </ul>
+         
         </div>
+        
+    <div class="input-group input-group-lg barra" style="width: 500px;">
+        <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
+                style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
+        <input type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-lg">
+           
+    </div>
           </div>
           <!-- Segunda columna -->
           <div class="col-sm-6">
-            <div *ngIf="cafeteriaSeleccionada">
+            <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+            <div *ngIf="cafeteriaSeleccionada"  [hidden]="ocultarImagen">
             <img src="../../../../../assets/volver.png"  (click)="volver()" alt=""
             style="height: 40px; margin-left: 80px;" srcset="">
         <h2 class="titulocafe" >{{cafeteriaSeleccionada.nombre}}</h2>
@@ -61,6 +65,7 @@
         <p style="margin-left: 80px; font-size: 17px;">
           {{cafeteriaSeleccionada.descripcion}}
         </p>
+        
     </div>
     
     
@@ -70,7 +75,7 @@
         <div class="row">
           <!-- Columna única -->
           <div class="col-sm-12">
-            <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+            
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 //leaflet
 import * as L from 'leaflet';
 import { latLng, tileLayer, marker, icon } from 'leaflet';
+import { Populares } from 'src/app/models/populares';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class HomeComponent implements AfterViewInit {
       .openPopup();
   }
   coleccionCafeteria: Cafeteria[] = [];
-
+  coleccionPopulares: Populares[] = [];
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
 
   modalVisibleProducto: boolean = false;
@@ -62,6 +63,12 @@ export class HomeComponent implements AfterViewInit {
     imagen: new FormControl('', Validators.required),
     descripcion: new FormControl('', Validators.required),
     direccion: new FormControl('', Validators.required)
+  })
+  //enlaza formulario de populares
+  populares = new FormGroup({
+    nombre: new FormControl('', Validators.required),
+    precio: new FormControl('', Validators.required),
+    comida: new FormControl('', Validators.required),
   })
   //definir que mostrar y que no
   ocultarMapa: boolean = false;
@@ -216,6 +223,7 @@ export class HomeComponent implements AfterViewInit {
 
   ngOnInit() {
     this.obtenerCafeterias();
+    this.obtenerPopulares();
   }
 
   obtenerCafeterias() {
@@ -228,7 +236,16 @@ export class HomeComponent implements AfterViewInit {
       }
     );
   }
-
+  obtenerPopulares() {
+    this.servicioCrud.obtenerPopulares().subscribe(
+      (populares: any[]) => {
+        this.coleccionPopulares= populares;
+      },
+      (error) => {
+        console.error('Error al obtener populares: ', error);
+      }
+    );
+  }
   //funcion de agregar ela cafeteria
   async agregarCafeteria() {
     if (this.cafeteria.valid) {
