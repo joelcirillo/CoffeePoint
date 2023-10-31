@@ -34,9 +34,9 @@
  <div>
   <div [hidden]="ocultarCafe" scope="col" class="cuadro">
       <ul>
-        <li *ngFor="let col of coleccionCafeteria"  class="titulo amarillo">
+        <li *ngFor="let col of coleccionCafeteria;  let even = even"  [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
             {{col.nombre}}
-            <p class="subtitulo amarillo">{{col.direccion}}</p>
+            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
             
             <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
                 Editar
@@ -46,9 +46,7 @@
             </button>
             
         </li>
-        <li *ngFor="let col of coleccionCafeteria" class="subtitulo amarillo">
-            
-        </li>
+        
         
           <!-- <li (click)="mostrarCafeteria()" class="titulo amarillo">
               1- Pepito Cafeteria <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">

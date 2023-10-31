@@ -69,26 +69,38 @@ ul{
     list-style: none;
 }
 li{
-    padding-left: 15px;
-    padding-top: 35px;
-    height: 96px;
+   padding: 30px;
+    height: 150px;
     
 }
-.amarillo{
+.titulo-amarillo{
     background-color: #feefc6;
+    font-size: 25px;
+    
 }
-.blanco{
+.titulo-blanco{
     background-color: #FFF;
+    font-size: 25px;
 }
-.titulo{
-    font-size: 20px;
-}
-.titulo:hover{
+
+.titulo-amarillo:hover{
     font-weight: bolder;
 }
-.subtitulo{
+.titulo-blanco:hover{
+    font-weight: bolder;
+}
+
+.subtitulo-amarillo{
     
     padding: 0;
+    font-size: 15px;
+    height: 20px;
+    text-align: center;
+}
+.subtitulo-blanco{
+    
+    padding: 0;
+    font-size: 15px;
     height: 20px;
     text-align: center;
 }
