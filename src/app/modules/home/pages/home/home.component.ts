@@ -64,7 +64,7 @@ export class HomeComponent implements AfterViewInit {
     direccion: new FormControl('', Validators.required)
   })
   //definir que mostrar y que no
-  ocultarComponente: boolean = false;
+  ocultarMapa: boolean = false;
   ocultarImagen: boolean = true;
   ocultarMenuGeneral: boolean = true;
   ocultarMenuPersonal: boolean = true;
@@ -75,56 +75,56 @@ export class HomeComponent implements AfterViewInit {
   ocultarResenas: boolean = true;
   //primera cafeteria
   mostrarCafeteria() {
-    this.ocultarComponente = true; // Ocultar el componente
+    this.ocultarMapa = true;
     this.ocultarImagen = false;
+    this.ocultarMenuGeneral = true;
+    this.ocultarMenuPersonal = true;
+    this.ocultarCafe = false;
     this.ocultarBotonMenuGeneral = true;
     this.ocultarBotonMenuPersonal = false;
-    this.ocultarBotonResenas = true;
-    this.ocultarBotonResenas = false; //unico dejar
-
+    this.ocultarBotonResenas = false;
     this.ocultarResenas = true;
 
   }
   volver() {
-    this.ocultarComponente = false; // Ocultar el componente
+    this.ocultarMapa = false;
     this.ocultarImagen = true;
     this.ocultarMenuGeneral = true;
-    this.ocultarCafe = false;
     this.ocultarMenuPersonal = true;
-    this.ocultarBotonMenuPersonal = true;
+    this.ocultarCafe = false;
     this.ocultarBotonMenuGeneral = false;
+    this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonResenas = true;
     this.ocultarResenas = true;
-    this.ocultarBotonResenas = true;
+
   }
   mostrarMenuGeneral() {
-    this.ocultarBotonResenas = true;
-    this.ocultarComponente = false; // Ocultar el componente principal
-    this.ocultarImagen = true; // Mostrar la imagen de volver
-
-    // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
-    this.ocultarCafe = false;
+    this.ocultarMapa = false;
+    this.ocultarImagen = true;
     this.ocultarMenuGeneral = false;
     this.ocultarMenuPersonal = true;
+    this.ocultarCafe = true;
+    this.ocultarBotonMenuGeneral = false;
+    this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonResenas = true;
     this.ocultarResenas = true;
 
   }
   mostrarMenuPersonal() {
-    this.ocultarComponente = true; // Ocultar el componente principal
-    this.ocultarImagen = false; // Mostrar la imagen de volver
-
-    // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
-    this.ocultarCafe = true;
+    this.ocultarMapa = true;
+    this.ocultarImagen = false;
     this.ocultarMenuGeneral = true;
     this.ocultarMenuPersonal = false;
+    this.ocultarCafe = true;
+    this.ocultarBotonMenuGeneral = true;
+    this.ocultarBotonMenuPersonal = false;
+    this.ocultarBotonResenas = false;
     this.ocultarResenas = true;
-
 
   }
   mostrarCafeterias() {
     this.ocultarBotonResenas = true;
-    this.ocultarComponente = false;
+    this.ocultarMapa = false;
     this.ocultarMenuGeneral = true;
     this.ocultarCafe = false;
     this.ocultarImagen = true;
@@ -132,46 +132,87 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonMenuGeneral = false;
     this.ocultarResenas = true;
+
   }
   mostrarResenas() {
-    this.ocultarComponente = true;
-    this.ocultarImagen = false;
-    this.ocultarCafe = true;
+    this.ocultarBotonResenas = true;
+    this.ocultarMapa = true;
     this.ocultarMenuGeneral = true;
+    this.ocultarCafe = true;
+    this.ocultarImagen = false;
     this.ocultarMenuPersonal = true;
+    this.ocultarBotonMenuPersonal = false;
+    this.ocultarBotonMenuGeneral = true;
     this.ocultarResenas = false;
 
-
   }
-  // cafeteria: FormGroup;
+  // volver() {
+  //   this.ocultarComponente = false; // Ocultar el componente
+  //   this.ocultarImagen = true;
+  //   this.ocultarMenuGeneral = true;
+  //   this.ocultarCafe = false;
+  //   this.ocultarMenuPersonal = true;
+  //   this.ocultarBotonMenuPersonal = true;
+  //   this.ocultarBotonMenuGeneral = false;
+  //   this.ocultarBotonResenas = true;
+  //   this.ocultarResenas = true;
+  //   this.ocultarBotonResenas = true;
+  // }
+  // mostrarMenuGeneral() {
+  //   this.ocultarBotonResenas = true;
+  //   this.ocultarComponente = false; // Ocultar el componente principal
+  //   this.ocultarImagen = true; // Mostrar la imagen de volver
 
-  // constructor(private formBuilder: FormBuilder, private cafeteriaService: CrudService) {
-  //   this.cafeteria = this.formBuilder.group({
-  //     nombre: '',
-  //     direccion: '',
-  //     imagen: '',
-  //     descripcion: ''
-  //   });
+  //   // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
+  //   this.ocultarCafe = true;
+  //   this.ocultarMenuGeneral = false;
+  //   this.ocultarMenuPersonal = true;
+  //   this.ocultarBotonResenas = true;
+  //   this.ocultarResenas = true;
+
+  // }
+  // mostrarMenuPersonal() {
+  //   this.ocultarComponente = true; // Ocultar el componente principal
+  //   this.ocultarImagen = false; // Mostrar la imagen de volver
+
+  //   // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
+  //   this.ocultarCafe = true;
+  //   this.ocultarMenuGeneral = true;
+  //   this.ocultarMenuPersonal = false;
+  //   this.ocultarResenas = true;
+
+
+  // }
+  // mostrarCafeterias() {
+  //   this.ocultarBotonResenas = true;
+  //   this.ocultarComponente = false;
+  //   this.ocultarMenuGeneral = true;
+  //   this.ocultarCafe = false;
+  //   this.ocultarImagen = true;
+  //   this.ocultarMenuPersonal = true;
+  //   this.ocultarBotonMenuPersonal = true;
+  //   this.ocultarBotonMenuGeneral = false;
+  //   this.ocultarResenas = true;
+  // }
+  // mostrarResenas() {
+  //   this.ocultarComponente = true;
+  //   this.ocultarImagen = false;
+  //   this.ocultarCafe = true;
+  //   this.ocultarMenuGeneral = true;
+  //   this.ocultarMenuPersonal = true;
+  //   this.ocultarResenas = false;
+
+
   // }
 
-  // // Método para agregar la cafetería a la base de datos
-  // agregarCafeteria() {
-  //   const newCafeteria = this.cafeteria.value;
-  //   this.cafeteriaService.addCafeteria(newCafeteria)
-  //     .then(() => {
-  //       console.log('Cafetería agregada exitosamente');
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error al agregar cafetería: ', error);
-  //     });
-  // }
 
   constructor(
     // llamamos servicio Crud
-    public servicioCrud: CrudService,
+    private servicioCrud: CrudService,
     public dialog: MatDialog,
+    
   ) { }
- 
+
 
   ngOnInit() {
     this.obtenerCafeterias();
@@ -202,10 +243,10 @@ export class HomeComponent implements AfterViewInit {
       // ENVIAMOS NUESTRO NUEVO PRODUCTO
       await this.servicioCrud.crearCafeteria(nuevaCafeteria)
         .then(cafeteria => {
-          alert("Ha agregado un nuevo producto con éxito :)");
+          alert("Ha agregado una nueva cafetería con éxito :)");
         })
         .catch(error => {
-          alert("Hubo un error al cargar el nuevo producto :( \n" + error);
+          alert("Hubo un error al cargar la cafetería :( \n" + error);
         })
     }
   }
@@ -221,12 +262,13 @@ export class HomeComponent implements AfterViewInit {
 
 
   }
+
   mostrarBorrar(cafeteriaSeleccionada: any) { //mostrar
     this.modalVisibleProducto = true;
     this.cafeteriaSeleccionada = cafeteriaSeleccionada;
   }
   //funcion del editar
-  editarCafeteria(){
+  editarCafeteria() {
     let datos: Cafeteria = {
       idCafeteria: this.cafeteriaSeleccionada.idCafeteria,
       nombre: this.cafeteria.value.nombre!,
@@ -235,50 +277,45 @@ export class HomeComponent implements AfterViewInit {
       direccion: this.cafeteria.value.direccion!
     }
     this.servicioCrud.modificarCafeteria(this.cafeteriaSeleccionada.idCafeteria, datos)
-    .then(producto=>{
-      alert("el producto fue modificado con exito.");
-    })
-    .catch(error=>{
-      alert("No se pudo modificar el producto \n"+error)
-    })
+      .then(producto => {
+        alert("La cafeteria fue modificada con exito.");
+      })
+      .catch(error => {
+        alert("No se pudo modificar la cafeteria \n" + error)
+      })
   }
-   borrarCafeteria(){
+  borrarCafeteria() {
     this.servicioCrud.eliminarCafeteria(this.cafeteriaSeleccionada.idCafeteria)
-    .then(respuesta=>{
-      alert("el producto ha sido eliminado correctamente.");
-    })
-    .catch(error=>{
-      alert("no se ha podido eliminar el producto: \n"+error)
-    })
+      .then(respuesta => {
+        alert("La cafeteria se ha eliminado con exito.");
+      })
+      .catch(error => {
+        alert("No se ha podido eliminar la cafeteria: \n" + error)
+      })
   }
- 
-  // openEditModal(): void {
-  //   const dialogRef = this.dialog.open(EditModalComponent, {
-  //     width: '250px', // Personaliza el ancho del modal según tus necesidades
-  //     data: {} // Puedes pasar datos aquí para mostrar en el modal
-  //   });
+  //mostrar prducto particular
+  modalVisible: boolean = false;
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     console.log('El modal de edición se cerró con el siguiente resultado:', result);
-  //   });
-  // }
-  // editMode: boolean = false;
-  // editarProducto() {
-  //   this.editMode = true;
-  //   let datos: Cafeteria = {
-  //     idCafeteria: this.cafeteriaSeleccionada.idCafeteria,
-  //     nombre: this.cafeteria.value.nombre!,
-  //     imagen: this.cafeteria.value.imagen!,
-  //     descripcion: this.cafeteria.value.descripcion!,
-  //     direccion: this.cafeteria.value.direccion!
-  //   }
-  //   this.servicioCrud.modificarCafeteria(this.cafeteriaSeleccionada.idCafeteria, datos)
-  //     .then(cafeteria => {
-  //       alert("el producto fue modificado con exito.");
-  //     })
-  //     .catch(error => {
-  //       alert("No se pudo modificar el producto \n" + error)
-  //     })
-  // }
+  mostrarVer(info: Cafeteria) {
+    // va a ser para el botón ver más
+    this.modalVisible = true;
 
+    // asignamos la información del producto seleccionado
+    this.cafeteriaSeleccionada = info;
+  }
+
+  // función para mostrar esos productos específicos
+    // Reemplaza Cafeteria con la estructura de datos real
+
+  // Función para obtener los datos de la cafetería por su ID
+  mostrarCafeteriaSeleccionada(id: string) {
+    this.servicioCrud.obtenerCafeteriaPorId(id).subscribe(
+      (cafeteria: any) => {
+        this.cafeteriaSeleccionada = cafeteria;
+      },
+      (error) => {
+        console.error('Error al obtener la cafetería', error);
+      }
+    );
+  }
 }

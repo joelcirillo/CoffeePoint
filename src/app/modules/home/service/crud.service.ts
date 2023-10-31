@@ -56,5 +56,8 @@ export class CrudService {
       }
     })
   }
+  obtenerCafeteriaPorId(id: string): Observable<any> {
+    return this.database.collection('cafeterias').doc(id).valueChanges();
+  }
   
 }

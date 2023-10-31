@@ -1,198 +1,241 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
+    rel="stylesheet">
 <div class="fondo">
-<button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Populares</button><button type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Menú</button>    <button type="button" [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Reseñas</button><button type="button" (click)="mostrarCafeterias()" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;">Cafeterías</button>
-<!-- nuevo mapa -->
-<div id="map" style="height: 460px; width: 680px;"></div>
-<!-- <div class="container" [hidden]="ocultarComponente" >
+    <div class="container">
+        <!-- Primera fila -->
+        <div class="row">
+          <!-- Primera columna -->
+          <div class="col-sm-6">
+            <button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton"
+        style="background-color:#a55e49 ; color: #FFF; ">Populares</button><button type="button"
+        [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton"
+        style="background-color:#a55e49 ; color: #FFF; ">Menú</button> <button type="button"
+        [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton"
+        style="background-color:#a55e49 ; color: #FFF; ">Reseñas</button><button type="button"
+        (click)="mostrarCafeterias()" class="btn boton"
+        style="background-color:#a55e49 ; color: #FFF; ">Cafeterías</button>
+        <div class="input-group input-group-lg barra" style="width: 500px;">
+            <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
+                    style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
+            <input type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-lg">
+                <div [hidden]="ocultarCafe" scope="col" class="cuadro">
+                    <ul>
+                        <li *ngFor="let col of coleccionCafeteria;  let even = even"
+                            [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
+                            <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria)">{{col.nombre}}</a>
+                            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
+            
+                            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
+                                Editar
+                            </button>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
+                                Eliminar
+                            </button>
+            
+                        </li>
+            
+            
+                    </ul>
+                 
+                </div>
+                <button type="button" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;"
+                data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
+                Agregar Cafetería
+            </button>
+        </div>
+          </div>
+          <!-- Segunda columna -->
+          <div class="col-sm-6">
+            <div *ngIf="cafeteriaSeleccionada">
+            <img src="../../../../../assets/volver.png"  (click)="volver()" alt=""
+            style="height: 40px; margin-left: 80px;" srcset="">
+        <h2 class="titulocafe" >{{cafeteriaSeleccionada.nombre}}</h2>
+    
+        <img src="{{cafeteriaSeleccionada.imagen}}" class="imagen" alt="">
+        <p style="margin-left: 80px; font-size: 17px;">
+          {{cafeteriaSeleccionada.descripcion}}
+        </p>
+    </div>
+    
+    
+          </div>
+        </div>
+        <!-- Segunda fila -->
+        <div class="row">
+          <!-- Columna única -->
+          <div class="col-sm-12">
+            <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+          </div>
+        </div>
+      </div>
+    
+    <!-- nuevo mapa -->
+    
+    <!-- <div class="container" [hidden]="ocultarComponente" >
         <div class="coffee">
             <h2>- Busca tu cafetería aquí -</h2>
         </div>
         <iframe src="https://www.google.com/maps/d/embed?mid=1A6nvf0XyTlJXBZAFXXEPUypZBSIDNk4&ehbc=2E312F" width="640" height="480"></iframe>
     </div>
 <div> -->
-    <img src="../../../../../assets/volver.png" [hidden]="ocultarImagen" (click)="volver()" alt="" style="height: 40px; margin-left: 80px;" srcset="">
-    <h2 class="titulocafe" [hidden]="ocultarImagen">- Pepito Cafeteria -</h2>
+   
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
+    rel="stylesheet">
+<div>
     
-    <img src="../../../assets/1946" [hidden]="ocultarImagen" class="imagen" alt="">
-   <p [hidden]="ocultarImagen" style="margin-left: 80px; font-size: 17px;">
-    Horario: lunes a domingo de 7:30 a 21:00. <br>
-    Teléfono: 02994777790. <br>
-    http://www.estacionmargus.com.ar/
-   </p>
+  
 </div>
-
-
-<div class="input-group input-group-lg barra" style="width: 500px;">
-    <span class="input-group-text"  style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
-    <input type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-  </div>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
- <div>
-  <div [hidden]="ocultarCafe" scope="col" class="cuadro">
-      <ul>
-        <li *ngFor="let col of coleccionCafeteria;  let even = even"  [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-            {{col.nombre}}
-            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
-            
-            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
-                Editar
-            </button>
-            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
-                Eliminar
-            </button>
-            
-        </li>
-        
-        
-          <!-- <li (click)="mostrarCafeteria()" class="titulo amarillo">
-              1- Pepito Cafeteria <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-          </li>
-          <li class="subtitulo amarillo"> Yrigoyen 1200</li>
-          <li (click)="mostrarCafeteria()" class="titulo blanco">
-              2- 1946 <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-          </li>
-          <li class="subtitulo blanco"> Gral. Roca 320</li>
-          <li (click)="mostrarCafeteria()"class="titulo amarillo">
-             3- Dunells <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-          </li>
-          <li class="subtitulo amarillo"> San Martín 970</li>
-          <li  class="titulo blanco">
-              4- Caju <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-           </li>
-           <li class="subtitulo blanco"> España 420</li>
-           <li  class="titulo amarillo">
-              5- Estacion Margus <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-           </li>
-           <li class="subtitulo amarillo"> Saez Peña 1080</li>
-           <li  class="titulo blanco">
-              6- Pucara <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-           </li>
-           <li class="subtitulo blanco">Brasil 1713</li>
-           <li  class="titulo amarillo">
-              7- Plaza Bar <img style="height: 30px; float:right;" src="../../../../../assets/estrellas.png" alt="" srcset="">
-           </li>
-           <li  class="subtitulo amarillo">Avenida Alem 210</li> -->
-      </ul>
-      
-  </div>
-</div> 
+</div>
 <div>
     <div [hidden]="ocultarMenuGeneral" class="cuadro">
         <ul>
-            <li  class="titulo amarillo">
+            <li class="titulo amarillo">
                 Cheeseecake $200 (Estacion Margus)
             </li>
-            <li  class="titulo blanco">
+            <li class="titulo blanco">
                 Medialunas $400 (1946)
             </li>
             <li class="titulo amarillo">
                 Cafe + Tostados $1000 (1946)
             </li>
-            <li  class="titulo blanco">
+            <li class="titulo blanco">
                 Tiramisú $500 (Plaza Bar)
-             </li>
-             <li  class="titulo amarillo">
+            </li>
+            <li class="titulo amarillo">
                 Cappuchino $450 (Caju)
-             </li>
-             <li  class="titulo blanco">
+            </li>
+            <li class="titulo blanco">
                 Desayuno Americano $10000 (Dunells)
-             </li>
-             <li  class="titulo amarillo">
+            </li>
+            <li class="titulo amarillo">
                 Pizza $200 (Estacion Margus)
-             </li>
+            </li>
         </ul>
-        
+
     </div>
-  </div> 
-  <div>
+</div>
+<div>
     <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
         <ul>
-            <li  class="titulo amarillo">
+            <li class="titulo amarillo">
                 Medialuna $200
             </li>
-            <li  class="titulo blanco">
+            <li class="titulo blanco">
                 Cafe + Tostados $3000
             </li>
             <li class="titulo amarillo">
                 Combo desayuno $7000
             </li>
-            <li  class="titulo blanco">
+            <li class="titulo blanco">
                 Tostadas de campo + Cafe $5000
-             </li>
-             <li  class="titulo amarillo">
+            </li>
+            <li class="titulo amarillo">
                 Exprimido + Tostados $400
-             </li>
-             <li  class="titulo blanco">
+            </li>
+            <li class="titulo blanco">
                 Cheeseecake $500
-             </li>
-             <li  class="titulo amarillo">
+            </li>
+            <li class="titulo amarillo">
                 Fosforitos $200
-             </li>
+            </li>
         </ul>
-        
+
     </div>
-    
-  </div> 
-  <div>
+
+</div>
+<div>
     <div [hidden]="ocultarResenas" class="cuadro menu">
         <ul>
-            <li  class="resenatitulo">
-                <h2 class="numero">3,9<img src="../../../../../assets/estrellas.png" style=" padding-left: 20px; width: 180px;" alt=""></h2>
+            <li class="resenatitulo">
+                <h2 class="numero">3,9<img src="../../../../../assets/estrellas.png"
+                        style=" padding-left: 20px; width: 180px;" alt=""></h2>
                 <p style="margin: 0;">20 reseñas</p>
                 <div class="input-group input-group-lg " style="width: 340px; margin: 0;">
-                    <span class="input-group-text"  style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img src="../../../../../assets/editar.png" style="height: 30px;" alt=""></span>
-                    <input placeholder="Escribir tu opinón..." type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-                  </div>
+                    <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
+                            src="../../../../../assets/editar.png" style="height: 30px;" alt=""></span>
+                    <input placeholder="Escribir tu opinón..." type="text" class="form-control"
+                        style="background-color: #c2806d;" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg">
+                </div>
             </li>
 
-            <li  class="resenablanco">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Romina Perez</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 6 meses</p>
+            <li class="resenablanco">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Romina Perez</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 6 meses</p>
                 <p class="resena2">Muy buena atencion y cosas muy ricas, excelente lugar para merendar</p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
-            <li  class="resenaamarillo">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Lucrecia Padin</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 7 meses</p>
+            <li class="resenaamarillo">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Lucrecia Padin</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 7 meses</p>
                 <p class="resena2">Muy lindo lugar, buenos precios y mucha variedad</p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
-            <li  class="resenablanco">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Fermin Poblete</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 10 meses</p>
+            <li class="resenablanco">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Fermin Poblete</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 10 meses</p>
                 <p class="resena2">El cafe estaba muy rico y muy calentito, las medialunas mortales</p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
-            <li  class="resenaamarillo">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Jonatan Antimir</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 3 meses</p>
+            <li class="resenaamarillo">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Jonatan Antimir</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 3 meses</p>
                 <p class="resena2">Mucha demora en la atencion, el lugar no esta tan mal</p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
-            <li  class="resenablanco">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Martin Ibañez</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 4 días</p>
+            <li class="resenablanco">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Martin Ibañez</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 4 días</p>
                 <p class="resena2">No pueden haber subido tanto los precios de la ultima vez que fui</p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
-            <li  class="resenaamarillo">
-                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;" ><img src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;" alt="">Martina Silva</h3>
-                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt="" style="height: 20px;"> hace 1 año</p>
+            <li class="resenaamarillo">
+                <h3 class="nombreresena" style="margin-top: 0px; padding-top: 0px;"><img
+                        src="../../../../../assets/fotodeperfil.png" style="height: 30px; margin-right: 20px;"
+                        alt="">Martina Silva</h3>
+                <p style="text-align: left;"><img src="../../../../../assets/5estrellas.png" alt=""
+                        style="height: 20px;"> hace 1 año</p>
                 <p class="resena2">Fui con amigas, linda tarde compartida, increible la variedad </p>
-                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like" src="../../../../../assets/dislike.png" alt=""></p>
+                <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                        src="../../../../../assets/dislike.png" alt=""></p>
             </li>
         </ul>
-        
+
     </div>
-    
-  </div> 
-  <button type="button" class="btn boton" style="background-color:#a55e49 ; color: #FFF; float: right;" data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
-    Agregar Cafetería
-</button>
+
+</div>
+
 <div class="modal fade" id="agregarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -214,12 +257,12 @@
                     <label class="form-label">Ingrese una imagen de la cafeteria:</label>
                     <input type="text" class="form-control" formControlName="imagen" placeholder="...">
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Ingrese descripción:</label>
                     <input type="text" class="form-control" formControlName="descripcion" placeholder="...">
                 </div>
-               
+
             </div>
 
             <!-- Corresponde a las ACCIONES -->
@@ -234,7 +277,8 @@
 
 </div>
 <!-- se agrega modal para editar -->
-<div class="modal fade" id="editarCafeteria"  *ngIf="modalVisibleProducto"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarCafeteria" *ngIf="modalVisibleProducto" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -245,22 +289,26 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese nombre de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="nombre" placeholder="{{cafeteriaSeleccionada.nombre}}">
+                    <input type="text" class="form-control" formControlName="nombre"
+                        placeholder="{{cafeteriaSeleccionada.nombre}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese dirección:</label>
-                    <input type="text" class="form-control" formControlName="direccion" placeholder="{{cafeteriaSeleccionada.direccion}}">
+                    <input type="text" class="form-control" formControlName="direccion"
+                        placeholder="{{cafeteriaSeleccionada.direccion}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese una imagen de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="imagen" placeholder="{{cafeteriaSeleccionada.imagen}}">
+                    <input type="text" class="form-control" formControlName="imagen"
+                        placeholder="{{cafeteriaSeleccionada.imagen}}">
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Ingrese descripción:</label>
-                    <input type="text" class="form-control" formControlName="descripcion" placeholder="{{cafeteriaSeleccionada.descripcion}}">
+                    <input type="text" class="form-control" formControlName="descripcion"
+                        placeholder="{{cafeteriaSeleccionada.descripcion}}">
                 </div>
-               
+
             </div>
 
             <!-- Corresponde a las ACCIONES -->
@@ -279,16 +327,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar el siguiente producto?
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar la siguiente cafeteria?
                 </h1>
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-           
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
             </div>
         </div>
     </div>
-
+   
 </div>
