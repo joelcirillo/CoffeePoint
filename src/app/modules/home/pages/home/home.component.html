@@ -38,10 +38,10 @@
             {{col.nombre}}
             <p class="subtitulo amarillo">{{col.direccion}}</p>
             
-            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria">
+            <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
                 Editar
             </button>
-            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarCafeteria">
+            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
                 Eliminar
             </button>
             
@@ -236,9 +236,9 @@
 
 </div>
 <!-- se agrega modal para editar -->
-<div class="modal fade" id="editarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarCafeteria"  *ngIf="modalVisibleProducto"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" *ngFor="let col of coleccionCafeteria">
+        <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -247,20 +247,20 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese nombre de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="nombre" placeholder="{{col.nombre}}">
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="{{cafeteriaSeleccionada.nombre}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese dirección:</label>
-                    <input type="text" class="form-control" formControlName="direccion" placeholder="{{col.direccion}}">
+                    <input type="text" class="form-control" formControlName="direccion" placeholder="{{cafeteriaSeleccionada.direccion}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese una imagen de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="imagen" placeholder="{{col.imagen}}">
+                    <input type="text" class="form-control" formControlName="imagen" placeholder="{{cafeteriaSeleccionada.imagen}}">
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label">Ingrese descripción:</label>
-                    <input type="text" class="form-control" formControlName="descripcion" placeholder="{{col.descripcion}}">
+                    <input type="text" class="form-control" formControlName="descripcion" placeholder="{{cafeteriaSeleccionada.descripcion}}">
                 </div>
                
             </div>
@@ -277,23 +277,20 @@
 
 </div>
 <!-- se agrega modal para eliminar -->
-<div class="modal fade" *ngIf="modalVisibleProducto" id="eliminarCafeteria" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar el siguiente producto?
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{cafeteriaSeleccionada.nombre}}
-                    <img src="{{cafeteriaSeleccionada.imagen}}" srcset="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
-                </div>
+<div class="modal fade" id="eliminarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar el siguiente producto?
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
             </div>
         </div>
     </div>
+
+</div>

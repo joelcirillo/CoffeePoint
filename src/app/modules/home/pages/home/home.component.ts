@@ -171,6 +171,8 @@ export class HomeComponent implements AfterViewInit {
     public servicioCrud: CrudService,
     public dialog: MatDialog,
   ) { }
+ 
+
   ngOnInit() {
     this.obtenerCafeterias();
   }
@@ -208,7 +210,7 @@ export class HomeComponent implements AfterViewInit {
     }
   }
   //mostrar botones
-  mostrarEditar(cafeteriaSeleccionada: Cafeteria) {
+  mostrarEditar(cafeteriaSeleccionada: any) {
     this.cafeteriaSeleccionada = cafeteriaSeleccionada;
     this.cafeteria.setValue({
       nombre: cafeteriaSeleccionada.nombre,
@@ -219,7 +221,7 @@ export class HomeComponent implements AfterViewInit {
 
 
   }
-  mostrarBorrar(cafeteriaSeleccionada: Cafeteria) { //mostrar
+  mostrarBorrar(cafeteriaSeleccionada: any) { //mostrar
     this.modalVisibleProducto = true;
     this.cafeteriaSeleccionada = cafeteriaSeleccionada;
   }
