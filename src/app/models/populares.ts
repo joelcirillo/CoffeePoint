@@ -1,7 +1,7 @@
 export interface Populares {
     idPopulares:string;
     comida: string;
-    precio: number;
+    precio: string;
     nombre:string;
     
 }

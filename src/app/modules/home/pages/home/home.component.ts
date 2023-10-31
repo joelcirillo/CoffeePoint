@@ -55,6 +55,7 @@ export class HomeComponent implements AfterViewInit {
   coleccionCafeteria: Cafeteria[] = [];
   coleccionPopulares: Populares[] = [];
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
+  popularSeleccionado!: Populares;
 
   modalVisibleProducto: boolean = false;
   // ENLAZA NUESTRO FORMULARIO
@@ -225,6 +226,30 @@ export class HomeComponent implements AfterViewInit {
     this.obtenerCafeterias();
     this.obtenerPopulares();
   }
+  //funcionalidad para populares
+  async agregarPopulares() {
+    if (this.populares.valid) {
+      let nuevaPopulares: Populares = {
+        idPopulares: '', // único que guardamos vacío; lo creamos en el CRUD
+        nombre:  this.populares.value.nombre!,
+        comida: this.populares.value.comida!,
+        precio:this.populares.value.precio! ,
+      };
+
+      // ENVIAMOS NUESTRO NUEVO PRODUCTO
+      await this.servicioCrud.crearPopulares(nuevaPopulares)
+        .then(populares => {
+          alert("Ha agregado una nueva comida popular con exito :)");
+        })
+        .catch(error => {
+          alert("Hubo un error al cargar la comida popular:( \n" + error);
+        })
+    }
+  }
+  mostrarBorrarPopulares(popularSeleccionado: any) { //mostrar
+    this.modalVisibleProducto = true;
+    this.popularSeleccionado = popularSeleccionado;
+  }
 
   obtenerCafeterias() {
     this.servicioCrud.obtenerCafeterias().subscribe(
@@ -245,6 +270,15 @@ export class HomeComponent implements AfterViewInit {
         console.error('Error al obtener populares: ', error);
       }
     );
+  }
+  borrarPopulares() {
+    this.servicioCrud.eliminarPopulares(this.popularSeleccionado.idPopulares)
+      .then(respuesta => {
+        alert("La comida popular se elimino con exito");
+      })
+      .catch(error => {
+        alert("No se ha podido eliminar la comida popular \n" + error)
+      })
   }
   //funcion de agregar ela cafeteria
   async agregarCafeteria() {
