@@ -10,24 +10,26 @@
       <p class="letra">correo electronico</p>
       <li class="list-group-item"><div class="input-group flex-nowrap">
         <span class="input-group-text" id="addon-wrapping">☕</span>
-        <input type="text" class="input" class="form-control" placeholder="correo electronico" aria-label="correo electronico" aria-describedby="addon-wrapping">
+        <input [(ngModel)]="usuario.email" type="text" class="input" class="form-control" placeholder="correo electronico" aria-label="correo electronico" aria-describedby="addon-wrapping">
       </div></li><br>
       <p class="letra">nombre completo</p>
       <li class="list-group-item"><div class="input-group flex-nowrap">
         <span class="input-group-text" id="addon-wrapping">☕</span>
-        <input type="text" class="input"  class="form-control" placeholder="nombre completo" aria-label="nombre completo" aria-describedby="addon-wrapping">
+        <input  type="text" class="input"  class="form-control" placeholder="nombre completo" aria-label="nombre completo" aria-describedby="addon-wrapping">
       </div></li>
         <br>
     <p class="letra">nombre de usuario</p>
       <li class="list-group-item"><div class="input-group flex-nowrap">
         <span class="input-group-text" id="addon-wrapping">☕</span>
-        <input type="text" class="input" class="form-control" placeholder="nombre de usuario" aria-label="nombre de usuario" aria-describedby="addon-wrapping">
+        <input  [(ngModel)]="usuario.nombre"type="text" class="input" class="form-control" placeholder="nombre de usuario" aria-label="nombre de usuario" aria-describedby="addon-wrapping">
       </div></li><br>
       <p class="letra">contraseña</p>
       <li class="list-group-item"><div class="input-group flex-nowrap">
         <span class="input-group-text" id="addon-wrapping">☕</span>
-        <input type="text" class="input" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="addon-wrapping">
+        <input  [(ngModel)]="usuario.contrasena" type="text" class="input" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="addon-wrapping">
       </div></li><br>
+
+      
     <button type="button" class="btn">
         crear
     </button>
