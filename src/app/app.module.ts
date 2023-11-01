@@ -12,6 +12,8 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 // import { AuthModule } from './modules/auth/auth.module';
 
@@ -35,6 +37,7 @@ import { CommonModule } from '@angular/common';
     AngularFireAuthModule,
     AngularFireStorageModule,
     CommonModule,
+    MatDialogModule
   ],
   exports:[
     RouterModule,

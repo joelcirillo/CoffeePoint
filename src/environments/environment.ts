@@ -1,13 +1,13 @@
 export const environment = {
     production: false,
-    firebaseConfig:{
-        apiKey: "AIzaSyBDWLQ8tr-HDfDlx6nBt5evwZKgtjBBImI",
-        authDomain: "coffeepoint-f83bd.firebaseapp.com",
-        projectId: "coffeepoint-f83bd",
-        storageBucket: "coffeepoint-f83bd.appspot.com",
-        messagingSenderId: "829782703657",
-        appId: "1:829782703657:web:6311f8ef2c79acd4cfa638",
-        measurementId: "G-HBPJBRXXW0" 
+    firebaseConfig: {
+        apiKey: "AIzaSyB2JF_KWKugY_6l2mbbIrkXgsc6nua94XY",
+        authDomain: "coffeepoint-21a30.firebaseapp.com",
+        projectId: "coffeepoint-21a30",
+        storageBucket: "coffeepoint-21a30.appspot.com",
+        messagingSenderId: "996596582467",
+        appId: "1:996596582467:web:97a6837428d41a57ceecf6",
+        measurementId: "G-BCLK94BZSE"
     }
 
 };
