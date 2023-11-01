@@ -36,8 +36,8 @@ export class RegisterComponent {
   // tomamos nuevos registros y mostramos los resultados
   async registrarse() {
     const credenciales = {
-      email: this.usuarios.email,
-      contrasena: this.usuarios.contrasena
+      email: this.usuario.email,
+      contrasena: this.usuario.contrasena
     };
 
     const res = await this.servicioAuth.registrar(credenciales.email, credenciales.contrasena)
@@ -54,7 +54,7 @@ export class RegisterComponent {
 
     const uid = await this.servicioAuth.getUid();
 
-    this.usuarios.uid = uid;
+    this.usuario.uid = uid;
 
     // GUARDA EL NUEVO USUARIO
     this.guardarUser();
@@ -62,9 +62,9 @@ export class RegisterComponent {
 
   // función que agrega NUEVO USUARIO
   async guardarUser(){
-    this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
+    this.servicioFirestore.agregarUsuario(this.usuario, this.usuario.uid)
     .then(res => {
-      console.log(this.usuarios)
+      console.log(this.usuario)
     })
     .catch(error =>{
       console.log('Error =>', error)
