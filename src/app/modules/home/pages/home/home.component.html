@@ -30,7 +30,7 @@
             <ul>
                 <li *ngFor="let col of coleccionCafeteria;  let even = even"
                     [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);mostrarMenudeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria)">{{col.nombre}}</a>
+                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);mostrarMenudeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria);">{{col.nombre}}</a>
                     <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
     
                     <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -82,11 +82,14 @@
                 </li>
     
                 <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"  *ngFor="let resenas of resenasCafeteria; let even = even" >
-                    <p class="resena2">{{resenas.puntaje}} <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""></p>
+                    <p class="resena2">{{resenas.puntuacion}} <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""></p>
                     <p class="resena2">{{resenas.resena}}</p>
                     <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
                             src="../../../../../assets/dislike.png" alt=""></p>
-                            <button (click)="eliminarResena(idCafeteriaSeleccionada, resenas.idResena)">Eliminar</button>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#eliminarResena" (click)="mostrarBorrarResena(resenas)">
+                        Eliminar
+                    </button>
                 </li>
                
                
@@ -169,35 +172,7 @@
 </div>
 </div>
 
-<div>
-    <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
-        <ul>
-            <li class="titulo amarillo">
-                Medialuna $200
-            </li>
-            <li class="titulo blanco">
-                Cafe + Tostados $3000
-            </li>
-            <li class="titulo amarillo">
-                Combo desayuno $7000
-            </li>
-            <li class="titulo blanco">
-                Tostadas de campo + Cafe $5000
-            </li>
-            <li class="titulo amarillo">
-                Exprimido + Tostados $400
-            </li>
-            <li class="titulo blanco">
-                Cheeseecake $500
-            </li>
-            <li class="titulo amarillo">
-                Fosforitos $200
-            </li>
-        </ul>
 
-    </div>
-
-</div>
 
 
 <div class="modal fade" id="agregarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -313,6 +288,25 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- se agrega modal para eliminar resena -->
+<div class="modal fade" id="eliminarResena" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Modal borrar reseñas?
+                </h1>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarResena()">Eliminar</button>
             </div>
         </div>
     </div>

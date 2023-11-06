@@ -363,6 +363,7 @@ export class HomeComponent implements AfterViewInit {
       .obtenerResenasdeCafeterias(idCafeteria)
       .subscribe(resenas => {
         this.resenasCafeteria= resenas;
+        console.log(resenas)
       });
   }
   //agregar reseñas
@@ -371,20 +372,33 @@ export class HomeComponent implements AfterViewInit {
   }
   agregarResena(idCafeteria: string) {
     console.log('ID de la cafetería seleccionada:', idCafeteria);
-    this.servicioCrud.crearResena(idCafeteria, this.nuevoPuntaje, this.nuevaResena);
+    const resenas: Resena = { idResena: '', puntuacion: this.nuevoPuntaje, resena: this.nuevaResena };
+    this.servicioCrud.crearResena(idCafeteria, this.nuevoPuntaje, this.nuevaResena, resenas);
     this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
     this.nuevaResena = ''; 
   }
+  // agregarResena(idCafeteria: string) {
+  //   console.log('ID de la cafetería seleccionada:', idCafeteria);
+  //   this.servicioCrud.crearResena(idCafeteria, this.nuevoPuntaje, this.nuevaResena, resenas);
+  //   this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
+  //   this.nuevaResena = ''; 
+  // }
   //eliminar reseñas
-  eliminarResena(idCafeteria: string, idResena: string) {
-    this.servicioCrud.eliminarResena(idCafeteria, idResena)
-      .then(respuesta => {
-        alert("La cafeteria se ha eliminado con exito.");
+  modalVisibleResena: boolean = false;
+  mostrarBorrarResena(resenaSeleccionada: any) {
+    this.modalVisibleResena = true;
+    this.resenaSeleccionada = resenaSeleccionada;
+  }
+  borrarResena(){
+    console.log(this.idCafeteriaSeleccionada, this.resenaSeleccionada.idResena)
+    console.log("La función borrarResena se está ejecutando");
+    this.servicioCrud.eliminarResena(this.idCafeteriaSeleccionada, this.resenaSeleccionada.idResena)
+      .then((resultado) => {
+        // Realiza acciones adicionales si es necesario
       })
-      .catch(error => {
-        alert("No se ha podido eliminar la cafeteria: \n" + error)
-      })
-    
+      .catch((error) => {
+        // Maneja el error de acuerdo con la lógica de tu aplicación
+      });
   }
   //mostrar menu
   mostrarMenudeCafeteriaSeleccionada(idCafeteria: string) {

@@ -115,30 +115,33 @@ export class CrudService {
       .collection('resenas')
       .valueChanges();
   }
-  crearResena(idCafeteria: string, nuevoPuntaje: number, nuevaResena: string) {
-    if (idCafeteria) {
-      return this.database
-        .collection('cafeterias')
-        .doc(idCafeteria)
-        .collection('resenas')
-        .add({ 
-          resena: nuevaResena,
-          puntaje: nuevoPuntaje
-        });
-    } else {
-      console.error('El ID de la cafetería está vacío.');
-      // Devuelve un valor predeterminado o lanza un error aquí según la lógica de tu aplicación
-      throw new Error('El ID de la cafetería está vacío.');
+  async crearResena(idCafeteria: string, nuevoPuntaje: number, nuevaResena: string, resenas: Resena) {
+    try {
+      const id = this.database.createId();
+      resenas.idResena = id;
+      console.log(id)
+      console.log(resenas)
+      const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(id).set(resenas);
+  
+      
+    } catch (error) {
+      throw error;
     }
   }
-  eliminarResena(idCafeteria: string, idResena: string) {
-    return this.database
-      .collection('cafeterias')
-      .doc(idCafeteria)
-      .collection('resenas')
-      .doc(idResena)
-      .delete();
+
+  
+  
+  async eliminarResena(idCafeteria: string, idResena: string) {
+    try {
+      const resp = await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(idResena).delete();
+      return resp;
+    } catch (error) {
+      throw error;
+    }
+   
   }
+
+  
     //funciones menu
     obtenerMenus(): Observable<Menu[]> {
       return this.menuColeccion.valueChanges();
@@ -166,13 +169,6 @@ export class CrudService {
         throw new Error('El ID de la cafetería está vacío.');
       }
     }
- // return this.database
-    //   .collection('cafeterias')
-    //   .doc(idCafeteria)
-    //   .collection('resenas')
-    //   .add({ 
-    //     resena: nuevaResena,
-    //     puntaje: nuevoPuntaje
-    //   });
+ 
  
 }
