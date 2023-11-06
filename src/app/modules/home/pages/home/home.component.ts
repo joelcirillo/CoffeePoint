@@ -63,6 +63,9 @@ export class HomeComponent implements AfterViewInit {
   resenasCafeteria: any[] = [];
   nuevoPuntaje: number =0;
   nuevaResena: string= '';
+  menusCafeteria: any[] = [];
+  nuevoPrecio: number = 0;
+  nuevaComida: string = '';
   idCafeteriaSeleccionada: string = '';
 
 
@@ -372,6 +375,32 @@ export class HomeComponent implements AfterViewInit {
     this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
     this.nuevaResena = ''; 
   }
+  //eliminar reseñas
+  eliminarResena(idCafeteria: string, idResena: string) {
+    this.servicioCrud.eliminarResena(idCafeteria, idResena)
+      .then(respuesta => {
+        alert("La cafeteria se ha eliminado con exito.");
+      })
+      .catch(error => {
+        alert("No se ha podido eliminar la cafeteria: \n" + error)
+      })
+    
+  }
+  //mostrar menu
+  mostrarMenudeCafeteriaSeleccionada(idCafeteria: string) {
+    this.servicioCrud
+      .obtenerMenuCafeteria(idCafeteria)
+      .subscribe(menus => {
+        this.menusCafeteria= menus;
+      });
+  }
+  agregarMenu(idCafeteria: string) {
+    console.log('ID de la cafetería seleccionada:', idCafeteria);
+    this.servicioCrud.crearMenu(idCafeteria, this.nuevaComida, this.nuevoPrecio);
+    this.nuevoPrecio = 0; // Restablece el precio después de agregar el elemento al menú
+    this.nuevaComida = ''; // Borra el nombre de la comida después de agregarla al menú
+  }
+
  
   }
 

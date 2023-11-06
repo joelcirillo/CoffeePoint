@@ -5,6 +5,7 @@ import { Cafeteria } from 'src/app/models/cafeteria';
 import { Observable } from 'rxjs';
 import { Populares } from 'src/app/models/populares';
 import { Resena } from 'src/app/models/resena';
+import { Menu } from "src/app/models/menu";
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +23,12 @@ export class CrudService {
   private cafeteriaColeccion: AngularFirestoreCollection<Cafeteria>
   private popularesColeccion: AngularFirestoreCollection<Populares>
   private resenaColeccion: AngularFirestoreCollection<Resena>
+  private menuColeccion: AngularFirestoreCollection<Menu>
   constructor(private database: AngularFirestore) {
     this.cafeteriaColeccion = database.collection('cafeterias')
     this.popularesColeccion = database.collection('populares')
     this.resenaColeccion = database.collection('resenas')
+    this.menuColeccion = database.collection('menus')
   }
  
   //funcion para llamar producto
@@ -128,6 +131,41 @@ export class CrudService {
       throw new Error('El ID de la cafetería está vacío.');
     }
   }
+  eliminarResena(idCafeteria: string, idResena: string) {
+    return this.database
+      .collection('cafeterias')
+      .doc(idCafeteria)
+      .collection('resenas')
+      .doc(idResena)
+      .delete();
+  }
+    //funciones menu
+    obtenerMenus(): Observable<Menu[]> {
+      return this.menuColeccion.valueChanges();
+    }
+    obtenerMenuCafeteria(idCafeteria: string): Observable<any[]> {
+      return this.database
+        .collection('cafeterias')
+        .doc(idCafeteria)
+        .collection('menu')
+        .valueChanges();
+    }
+    
+    crearMenu(idCafeteria: string, nuevaComida: string, nuevoPrecio: number) {
+      if (idCafeteria) {
+        return this.database
+          .collection('cafeterias')
+          .doc(idCafeteria)
+          .collection('menu')
+          .add({ 
+            comida: nuevaComida,
+            precio: nuevoPrecio
+          });
+      } else {
+        console.error('El ID de la cafetería está vacío.');
+        throw new Error('El ID de la cafetería está vacío.');
+      }
+    }
  // return this.database
     //   .collection('cafeterias')
     //   .doc(idCafeteria)

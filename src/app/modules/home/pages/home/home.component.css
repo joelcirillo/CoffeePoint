@@ -111,23 +111,22 @@ li{
     margin-bottom: 0px;
 }
 .resenatitulo{
-    height: 270px;
+    height: 280px;
 }
 .nombreresena{
     font-size: 25px;
     text-align: left;
 }
-.resena2{
 
+.resena-blanco{
+    background-color: #FFF;
+    height: 200px;
     font-size: 20px;
 }
-.resenablanco{
-    background-color: #FFF;
-    height: 230px;
-}
-.resenaamarillo{
+.resena-amarillo{
     background-color: #feefc6;
     height: 230px;
+    font-size: 20px;
 }
 .like{
     float: right;

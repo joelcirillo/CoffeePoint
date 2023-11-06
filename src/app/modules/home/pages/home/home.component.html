@@ -30,7 +30,7 @@
             <ul>
                 <li *ngFor="let col of coleccionCafeteria;  let even = even"
                     [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria)">{{col.nombre}}</a>
+                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);mostrarMenudeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria)">{{col.nombre}}</a>
                     <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
     
                     <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -72,7 +72,7 @@
                             style=" padding-left: 20px; width: 180px;" alt=""></h2>
                     <p style="margin: 0;">20 reseñas</p>
                     <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
-                        <input type="number" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje" placeholder="Puntaje" />
+                        <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input type="number" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje" placeholder="Puntaje" />
                         <input [(ngModel)]="nuevaResena" placeholder="Escribir tu opinón..." name="nuevaResena" type="text" class="form-control"
                             style="background-color: #c2806d;" aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-lg" >
@@ -81,16 +81,36 @@
                    
                 </li>
     
-                <li [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}"  *ngFor="let resenas of resenasCafeteria; let even = even" >
-                    <p class="resena2">{{resenas.puntaje}} <img src="../../../../../assets/1estrella.png" alt=""></p>
+                <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"  *ngFor="let resenas of resenasCafeteria; let even = even" >
+                    <p class="resena2">{{resenas.puntaje}} <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""></p>
                     <p class="resena2">{{resenas.resena}}</p>
                     <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
                             src="../../../../../assets/dislike.png" alt=""></p>
+                            <button (click)="eliminarResena(idCafeteriaSeleccionada, resenas.idResena)">Eliminar</button>
                 </li>
+               
                
             </ul>
     
         </div>
+        <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
+            <ul>
+              <li class="resenatitulo">
+                <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
+                  <p>Agregar elemento al menú</p>
+                  <p>Precio</p>
+                  <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio" placeholder="Precio" />
+                  <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..." name="nuevaComida" type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" >
+                  <button type="submit" class="btn boton" style="background-color:#a55e49 ; color: #FFF; " >Agregar</button>
+                </form>
+              </li>
+          
+              <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}" *ngFor="let menu of menusCafeteria; let even = even">
+                <p class="resena2">{{menu.comida}}</p>
+                <p class="resena2">{{menu.precio}}</p>
+              </li>
+            </ul>
+          </div>
     <div class="input-group input-group-lg barra" style="width: 500px;">
         <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
                 style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
