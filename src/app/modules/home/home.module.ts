@@ -9,6 +9,7 @@ import { PrimeraComponent } from './pages/primera/primera.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -21,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
   ],
 })
 export class HomeModule { }

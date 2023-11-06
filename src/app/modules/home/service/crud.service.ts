@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Cafeteria } from 'src/app/models/cafeteria';
 import { Observable } from 'rxjs';
 import { Populares } from 'src/app/models/populares';
+import { Resena } from 'src/app/models/resena';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +21,11 @@ export class CrudService {
 
   private cafeteriaColeccion: AngularFirestoreCollection<Cafeteria>
   private popularesColeccion: AngularFirestoreCollection<Populares>
+  private resenaColeccion: AngularFirestoreCollection<Resena>
   constructor(private database: AngularFirestore) {
     this.cafeteriaColeccion = database.collection('cafeterias')
     this.popularesColeccion = database.collection('populares')
+    this.resenaColeccion = database.collection('resenas')
   }
  
   //funcion para llamar producto
@@ -96,4 +99,42 @@ export class CrudService {
       }
     })
   }
+  //funcion para llamar reseñas
+  obtenerResenas(): Observable<Resena[]> {
+    return this.resenaColeccion.valueChanges();
+  }
+  
+  //funciones de reseñas
+  obtenerResenasdeCafeterias(idCafeteria: string): Observable<any[]> {
+    return this.database
+      .collection('cafeterias')
+      .doc(idCafeteria)
+      .collection('resenas')
+      .valueChanges();
+  }
+  crearResena(idCafeteria: string, nuevoPuntaje: number, nuevaResena: string) {
+    if (idCafeteria) {
+      return this.database
+        .collection('cafeterias')
+        .doc(idCafeteria)
+        .collection('resenas')
+        .add({ 
+          resena: nuevaResena,
+          puntaje: nuevoPuntaje
+        });
+    } else {
+      console.error('El ID de la cafetería está vacío.');
+      // Devuelve un valor predeterminado o lanza un error aquí según la lógica de tu aplicación
+      throw new Error('El ID de la cafetería está vacío.');
+    }
+  }
+ // return this.database
+    //   .collection('cafeterias')
+    //   .doc(idCafeteria)
+    //   .collection('resenas')
+    //   .add({ 
+    //     resena: nuevaResena,
+    //     puntaje: nuevoPuntaje
+    //   });
+ 
 }

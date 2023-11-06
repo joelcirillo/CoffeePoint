@@ -3,12 +3,14 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from
 import { Cafeteria } from "../../../../models/cafeteria";
 import { CrudService } from '../../service/crud.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 //leaflet
 import * as L from 'leaflet';
 import { latLng, tileLayer, marker, icon } from 'leaflet';
 import { Populares } from 'src/app/models/populares';
+import { Resena } from "src/app/models/resena";
 
 
 @Component({
@@ -54,8 +56,15 @@ export class HomeComponent implements AfterViewInit {
   }
   coleccionCafeteria: Cafeteria[] = [];
   coleccionPopulares: Populares[] = [];
+  coleccionResena: Resena[] = [];
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
   popularSeleccionado!: Populares;
+  resenaSeleccionada!: Resena;
+  resenasCafeteria: any[] = [];
+  nuevoPuntaje: number =0;
+  nuevaResena: string= '';
+  idCafeteriaSeleccionada: string = '';
+
 
   modalVisibleProducto: boolean = false;
   // ENLAZA NUESTRO FORMULARIO
@@ -71,6 +80,11 @@ export class HomeComponent implements AfterViewInit {
     precio: new FormControl('', Validators.required),
     comida: new FormControl('', Validators.required),
   })
+  //enlaza formulario de reseñas
+  resena = new FormGroup({
+    resena: new FormControl('', Validators.required),
+    puntuacion: new FormControl('', Validators.required),
+  })
   //definir que mostrar y que no
   ocultarMapa: boolean = false;
   ocultarImagen: boolean = true;
@@ -81,8 +95,11 @@ export class HomeComponent implements AfterViewInit {
   ocultarBotonMenuPersonal: boolean = true;
   ocultarBotonResenas: boolean = true;
   ocultarResenas: boolean = true;
+  ocultarBotonPopulares: boolean= true;
+  ocultarBotonAgregar: boolean= false;
   //primera cafeteria
   mostrarCafeteria() {
+    
     this.ocultarMapa = true;
     this.ocultarImagen = false;
     this.ocultarMenuGeneral = true;
@@ -92,6 +109,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = false;
     this.ocultarBotonResenas = false;
     this.ocultarResenas = true;
+    this.ocultarBotonPopulares= true;
+    this.ocultarBotonAgregar= true;
 
   }
   volver() {
@@ -104,6 +123,9 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonResenas = true;
     this.ocultarResenas = true;
+    this.ocultarBotonPopulares= true;
+    this.ocultarBotonAgregar= false;
+    
 
   }
   mostrarMenuGeneral() {
@@ -116,6 +138,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonResenas = true;
     this.ocultarResenas = true;
+    this.ocultarBotonPopulares= false;
+    this.ocultarBotonAgregar= true;
 
   }
   mostrarMenuPersonal() {
@@ -128,6 +152,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = false;
     this.ocultarBotonResenas = false;
     this.ocultarResenas = true;
+    this.ocultarBotonPopulares= true;
+    this.ocultarBotonAgregar= true;
 
   }
   mostrarCafeterias() {
@@ -140,10 +166,12 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = true;
     this.ocultarBotonMenuGeneral = false;
     this.ocultarResenas = true;
+    this.ocultarBotonPopulares= true;
+    this.ocultarBotonAgregar= false;
 
   }
   mostrarResenas() {
-    this.ocultarBotonResenas = true;
+    this.ocultarBotonResenas = false;
     this.ocultarMapa = true;
     this.ocultarMenuGeneral = true;
     this.ocultarCafe = true;
@@ -152,66 +180,11 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonMenuPersonal = false;
     this.ocultarBotonMenuGeneral = true;
     this.ocultarResenas = false;
+    this.ocultarBotonPopulares= true;
+    this.ocultarBotonAgregar= true;
 
   }
-  // volver() {
-  //   this.ocultarComponente = false; // Ocultar el componente
-  //   this.ocultarImagen = true;
-  //   this.ocultarMenuGeneral = true;
-  //   this.ocultarCafe = false;
-  //   this.ocultarMenuPersonal = true;
-  //   this.ocultarBotonMenuPersonal = true;
-  //   this.ocultarBotonMenuGeneral = false;
-  //   this.ocultarBotonResenas = true;
-  //   this.ocultarResenas = true;
-  //   this.ocultarBotonResenas = true;
-  // }
-  // mostrarMenuGeneral() {
-  //   this.ocultarBotonResenas = true;
-  //   this.ocultarComponente = false; // Ocultar el componente principal
-  //   this.ocultarImagen = true; // Mostrar la imagen de volver
-
-  //   // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
-  //   this.ocultarCafe = true;
-  //   this.ocultarMenuGeneral = false;
-  //   this.ocultarMenuPersonal = true;
-  //   this.ocultarBotonResenas = true;
-  //   this.ocultarResenas = true;
-
-  // }
-  // mostrarMenuPersonal() {
-  //   this.ocultarComponente = true; // Ocultar el componente principal
-  //   this.ocultarImagen = false; // Mostrar la imagen de volver
-
-  //   // Ahora, establece las variables para mostrar el cuadro correcto según tu lógica
-  //   this.ocultarCafe = true;
-  //   this.ocultarMenuGeneral = true;
-  //   this.ocultarMenuPersonal = false;
-  //   this.ocultarResenas = true;
-
-
-  // }
-  // mostrarCafeterias() {
-  //   this.ocultarBotonResenas = true;
-  //   this.ocultarComponente = false;
-  //   this.ocultarMenuGeneral = true;
-  //   this.ocultarCafe = false;
-  //   this.ocultarImagen = true;
-  //   this.ocultarMenuPersonal = true;
-  //   this.ocultarBotonMenuPersonal = true;
-  //   this.ocultarBotonMenuGeneral = false;
-  //   this.ocultarResenas = true;
-  // }
-  // mostrarResenas() {
-  //   this.ocultarComponente = true;
-  //   this.ocultarImagen = false;
-  //   this.ocultarCafe = true;
-  //   this.ocultarMenuGeneral = true;
-  //   this.ocultarMenuPersonal = true;
-  //   this.ocultarResenas = false;
-
-
-  // }
+  
 
 
   constructor(
@@ -225,6 +198,7 @@ export class HomeComponent implements AfterViewInit {
   ngOnInit() {
     this.obtenerCafeterias();
     this.obtenerPopulares();
+    this.obtenerResenas();
   }
   //funcionalidad para populares
   async agregarPopulares() {
@@ -271,6 +245,17 @@ export class HomeComponent implements AfterViewInit {
       }
     );
   }
+  obtenerResenas() {
+    this.servicioCrud.obtenerResenas().subscribe(
+      (resenas: any[]) => {
+        this.coleccionResena = resenas;
+      },
+      (error) => {
+        console.error('Error al obtener cafeterías: ', error);
+      }
+    );
+  }
+  
   borrarPopulares() {
     this.servicioCrud.eliminarPopulares(this.popularSeleccionado.idPopulares)
       .then(respuesta => {
@@ -369,4 +354,24 @@ export class HomeComponent implements AfterViewInit {
       }
     );
   }
-}
+  //mostrar reseña
+  mostrarResenasdeCafeteriaSeleccionada(idCafeteria: string) {
+    this.servicioCrud
+      .obtenerResenasdeCafeterias(idCafeteria)
+      .subscribe(resenas => {
+        this.resenasCafeteria= resenas;
+      });
+  }
+  //agregar reseñas
+  seleccionarCafeteria(idCafeteria: string) {
+    this.idCafeteriaSeleccionada = idCafeteria;
+  }
+  agregarResena(idCafeteria: string) {
+    console.log('ID de la cafetería seleccionada:', idCafeteria);
+    this.servicioCrud.crearResena(idCafeteria, this.nuevoPuntaje, this.nuevaResena);
+    this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
+    this.nuevaResena = ''; 
+  }
+ 
+  }
+
