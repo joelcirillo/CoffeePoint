@@ -71,6 +71,7 @@ export class HomeComponent implements AfterViewInit {
 
   modalVisibleProducto: boolean = false;
   // ENLAZA NUESTRO FORMULARIO
+  
   cafeteria = new FormGroup({
     nombre: new FormControl('', Validators.required),
     imagen: new FormControl('', Validators.required),
@@ -86,7 +87,7 @@ export class HomeComponent implements AfterViewInit {
   //enlaza formulario de reseñas
   resena = new FormGroup({
     resena: new FormControl('', Validators.required),
-    puntuacion: new FormControl('', Validators.required),
+    puntuacion: new FormControl(0, Validators.required),
   })
   //definir que mostrar y que no
   ocultarMapa: boolean = false;
@@ -377,12 +378,32 @@ export class HomeComponent implements AfterViewInit {
     this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
     this.nuevaResena = ''; 
   }
-  // agregarResena(idCafeteria: string) {
-  //   console.log('ID de la cafetería seleccionada:', idCafeteria);
-  //   this.servicioCrud.crearResena(idCafeteria, this.nuevoPuntaje, this.nuevaResena, resenas);
-  //   this.nuevoPuntaje = 0; // Restablece el puntaje después de agregar la reseña
-  //   this.nuevaResena = ''; 
-  // }
+  //editar reseñas
+  mostrarEditarResena(resena: any) {
+    this.resenaSeleccionada = resena;
+    this.resena.setValue({
+      puntuacion: this.resenaSeleccionada.puntuacion,
+      resena: this.resenaSeleccionada.resena,
+    });
+  }
+ 
+
+  guardarEdicionResena() {
+    let nuevoPuntaje: number = 0;
+    let nuevaResena: string = '';
+
+    // Llama a la función de edición de reseña en tu servicio CRUD
+    this.servicioCrud.editarResena(this.cafeteriaSeleccionada.idCafeteria, this.resenaSeleccionada.idResena, nuevoPuntaje, nuevaResena)
+      .then((resultado) => {
+        // Realiza acciones adicionales si es necesario
+        console.log("Reseña editada con éxito");
+      })
+      .catch((error) => {
+        // Maneja el error de acuerdo con la lógica de tu aplicación
+        console.error("Error al editar la reseña:", error);
+      });
+  }
+
   //eliminar reseñas
   modalVisibleResena: boolean = false;
   mostrarBorrarResena(resenaSeleccionada: any) {

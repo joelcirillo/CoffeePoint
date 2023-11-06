@@ -140,6 +140,13 @@ export class CrudService {
     }
    
   }
+  async editarResena(idCafeteria: string, idResena: string, nuevoPuntaje: number, nuevaResena: string) {
+    try {
+      await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(idResena).update({puntuacion: nuevoPuntaje, resena: nuevaResena});
+    } catch (error) {
+      throw error;
+    }
+  }
 
   
     //funciones menu

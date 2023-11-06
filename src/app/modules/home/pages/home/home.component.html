@@ -7,150 +7,172 @@
     <div class="container">
         <!-- Primera fila -->
         <div class="row">
-          <!-- Primera columna -->
-          <div class="col-sm-6">
-            <button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()" class="btn boton"
-        style="background-color:#a55e49 ; color: #FFF; ">Populares</button><button type="button"
-        [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton"
-        style="background-color:#a55e49 ; color: #FFF; ">Menú</button> <button type="button"
-        [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton"
-        style="background-color:#a55e49 ; color: #FFF; ">Reseñas</button><button type="button"
-        (click)="mostrarCafeterias()" class="btn boton"
-        style="background-color:#a55e49 ; color: #FFF; ">Cafeterías</button>
-        <button [hidden]="ocultarBotonAgregar"  type="button" class="btn boton" style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
-        data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
-        Agregar Cafetería
-    </button>
-    <button [hidden]="ocultarBotonPopulares"  type="button" class="btn boton" style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
-        data-bs-toggle="modal" data-bs-target="#agregarPopulares">
-        Agregar Popular
-    </button>
-        
-        <div [hidden]="ocultarCafe" scope="col" class="cuadro">
-            <ul>
-                <li *ngFor="let col of coleccionCafeteria;  let even = even"
-                    [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                    <a  (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);mostrarMenudeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria);">{{col.nombre}}</a>
-                    <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
-    
-                    <button type="button" class="btn boton" class="btn btn-outline-success" data-bs-toggle="modal"
-                        data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
-                        Editar
-                    </button>
-                    <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
-                        data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
-                        Eliminar
-                    </button>
-    
-                </li>
-    
-    
-            </ul>
-         
-        </div>
-        <div [hidden]="ocultarMenuGeneral" scope="col" class="cuadro">
-            <ul>
-                <li *ngFor="let col of coleccionPopulares;  let even = even"
-                    [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                    {{col.comida}} {{col.precio}}{{col.nombre}}
-                    
-                    <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
-                        data-bs-target="#eliminarPopulares" (click)="mostrarBorrarPopulares(col)">
-                        Eliminar
-                    </button>
-    
-                </li>
-    
-    
-            </ul>
-         
-        </div>
-        <div [hidden]="ocultarResenas" class="cuadro menu">
-            <ul>
-                <li class="resenatitulo">
-                    <h2 class="numero">3,9<img src="../../../../../assets/estrellas.png"
-                            style=" padding-left: 20px; width: 180px;" alt=""></h2>
-                    <p style="margin: 0;">20 reseñas</p>
-                    <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
-                        <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input type="number" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje" placeholder="Puntaje" />
-                        <input [(ngModel)]="nuevaResena" placeholder="Escribir tu opinón..." name="nuevaResena" type="text" class="form-control"
-                            style="background-color: #c2806d;" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" >
-                        <button type="submit" class="btn boton" style="background-color:#a55e49 ; color: #FFF; " >Agregar</button>
-                      </form>
-                   
-                </li>
-    
-                <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"  *ngFor="let resenas of resenasCafeteria; let even = even" >
-                    <p class="resena2">{{resenas.puntuacion}} <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""></p>
-                    <p class="resena2">{{resenas.resena}}</p>
-                    <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
-                            src="../../../../../assets/dislike.png" alt=""></p>
-                            <button type="button" class="btn boton" class="btn btn-outline-danger" data-bs-toggle="modal"
-                        data-bs-target="#eliminarResena" (click)="mostrarBorrarResena(resenas)">
-                        Eliminar
-                    </button>
-                </li>
-               
-               
-            </ul>
-    
-        </div>
-        <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
-            <ul>
-              <li class="resenatitulo">
-                <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
-                  <p>Agregar elemento al menú</p>
-                  <p>Precio</p>
-                  <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio" placeholder="Precio" />
-                  <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..." name="nuevaComida" type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" >
-                  <button type="submit" class="btn boton" style="background-color:#a55e49 ; color: #FFF; " >Agregar</button>
-                </form>
-              </li>
-          
-              <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}" *ngFor="let menu of menusCafeteria; let even = even">
-                <p class="resena2">{{menu.comida}}</p>
-                <p class="resena2">{{menu.precio}}</p>
-              </li>
-            </ul>
-          </div>
-    <div class="input-group input-group-lg barra" style="width: 500px;">
-        <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
-                style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
-        <input type="text" class="form-control" style="background-color: #c2806d;" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-lg">
-           
-    </div>
-          </div>
-          <!-- Segunda columna -->
-          <div class="col-sm-6">
-            <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
-            <div *ngIf="cafeteriaSeleccionada"  [hidden]="ocultarImagen">
-            <img src="../../../../../assets/volver.png"  (click)="volver()" alt=""
-            style="height: 40px; margin-left: 80px;" srcset="">
-        <h2 class="titulocafe" >{{cafeteriaSeleccionada.nombre}}</h2>
-    
-        <img src="{{cafeteriaSeleccionada.imagen}}" class="imagen" alt="">
-        <p style="margin-left: 80px; font-size: 17px;">
-          {{cafeteriaSeleccionada.descripcion}}
-        </p>
-        
-    </div>
-    
-    
-          </div>
+            <!-- Primera columna -->
+            <div class="col-sm-6">
+                <button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()"
+                    class="btn boton" style="background-color:#a55e49 ; color: #FFF; ">Populares</button><button
+                    type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton"
+                    style="background-color:#a55e49 ; color: #FFF; ">Menú</button> <button type="button"
+                    [hidden]="ocultarBotonResenas" (click)="mostrarResenas()" class="btn boton"
+                    style="background-color:#a55e49 ; color: #FFF; ">Reseñas</button><button type="button"
+                    (click)="mostrarCafeterias()" class="btn boton"
+                    style="background-color:#a55e49 ; color: #FFF; ">Cafeterías</button>
+                <button [hidden]="ocultarBotonAgregar" type="button" class="btn boton"
+                    style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
+                    data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
+                    Agregar Cafetería
+                </button>
+                <button [hidden]="ocultarBotonPopulares" type="button" class="btn boton"
+                    style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
+                    data-bs-toggle="modal" data-bs-target="#agregarPopulares">
+                    Agregar Popular
+                </button>
+
+                <div [hidden]="ocultarCafe" scope="col" class="cuadro">
+                    <ul>
+                        <li *ngFor="let col of coleccionCafeteria;  let even = even"
+                            [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
+                            <a
+                                (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(col.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(col.idCafeteria);mostrarMenudeCafeteriaSeleccionada(col.idCafeteria);seleccionarCafeteria(col.idCafeteria);">{{col.nombre}}</a>
+                            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">{{col.direccion}}</p>
+
+                            <button type="button" class="btn boton" class="btn btn-outline-success"
+                                data-bs-toggle="modal" data-bs-target="#editarCafeteria" (click)="mostrarEditar(col)">
+                                Editar
+                            </button>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(col)">
+                                Eliminar
+                            </button>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+                <div [hidden]="ocultarMenuGeneral" scope="col" class="cuadro">
+                    <ul>
+                        <li *ngFor="let col of coleccionPopulares;  let even = even"
+                            [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
+                            {{col.comida}} {{col.precio}}{{col.nombre}}
+
+                            <button type="button" class="btn boton" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#eliminarPopulares"
+                                (click)="mostrarBorrarPopulares(col)">
+                                Eliminar
+                            </button>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+                <div [hidden]="ocultarResenas" class="cuadro menu">
+                    <ul>
+                        <li class="resenatitulo">
+                            <h2 class="numero">3,9<img src="../../../../../assets/estrellas.png"
+                                    style=" padding-left: 20px; width: 180px;" alt=""></h2>
+                            <p style="margin: 0;">20 reseñas</p>
+                            <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
+                                <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input
+                                    type="number" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje"
+                                    placeholder="Puntaje" />
+                                <input [(ngModel)]="nuevaResena" placeholder="Escribir tu opinón..." name="nuevaResena"
+                                    type="text" class="form-control" style="background-color: #c2806d;"
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <button type="submit" class="btn boton"
+                                    style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
+                            </form>
+
+                        </li>
+
+                        <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"
+                            *ngFor="let resenas of resenasCafeteria; let even = even">
+                            <p class="resena2">{{resenas.puntuacion}} <img src="../../../../../assets/1estrella.png"
+                                    style="height: 35px;" alt=""></p>
+                            <p class="resena2">{{resenas.resena}}</p>
+                            <p><img class="like " src="../../../../../assets/like.png" alt=""><img class="like"
+                                    src="../../../../../assets/dislike.png" alt=""></p>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#eliminarResena"
+                                (click)="mostrarBorrarResena(resenas)">
+                                Eliminar
+                            </button>
+                            <button type="button" class="btn boton" class="btn btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#editarResena"
+                                (click)="mostrarEditarResena(resenas)">
+                                Editar
+                            </button>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+                <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
+                    <ul>
+                        <li class="resenatitulo">
+                            <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
+                                <p>Agregar elemento al menú</p>
+                                <p>Precio</p>
+                                <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
+                                    placeholder="Precio" />
+                                <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..."
+                                    name="nuevaComida" type="text" class="form-control"
+                                    style="background-color: #c2806d;" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-lg">
+                                <button type="submit" class="btn boton"
+                                    style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
+                            </form>
+                        </li>
+
+                        <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"
+                            *ngFor="let menu of menusCafeteria; let even = even">
+                            <p class="resena2">{{menu.comida}}</p>
+                            <p class="resena2">{{menu.precio}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="input-group input-group-lg barra" style="width: 500px;">
+                    <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
+                            style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
+                    <input type="text" class="form-control" style="background-color: #c2806d;"
+                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+
+                </div>
+            </div>
+            <!-- Segunda columna -->
+            <div class="col-sm-6">
+                <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+                <div *ngIf="cafeteriaSeleccionada" [hidden]="ocultarImagen">
+                    <img src="../../../../../assets/volver.png" (click)="volver()" alt=""
+                        style="height: 40px; margin-left: 80px;" srcset="">
+                    <h2 class="titulocafe">{{cafeteriaSeleccionada.nombre}}</h2>
+
+                    <img src="{{cafeteriaSeleccionada.imagen}}" class="imagen" alt="">
+                    <p style="margin-left: 80px; font-size: 17px;">
+                        {{cafeteriaSeleccionada.descripcion}}
+                    </p>
+
+                </div>
+
+
+            </div>
         </div>
         <!-- Segunda fila -->
         <div class="row">
-          <!-- Columna única -->
-          <div class="col-sm-12">
-            
-          </div>
+            <!-- Columna única -->
+            <div class="col-sm-12">
+
+            </div>
         </div>
-      </div>
-    
+    </div>
+
     <!-- nuevo mapa -->
-    
+
     <!-- <div class="container" [hidden]="ocultarComponente" >
         <div class="coffee">
             <h2>- Busca tu cafetería aquí -</h2>
@@ -158,18 +180,18 @@
         <iframe src="https://www.google.com/maps/d/embed?mid=1A6nvf0XyTlJXBZAFXXEPUypZBSIDNk4&ehbc=2E312F" width="640" height="480"></iframe>
     </div>
 <div> -->
-   
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
-    rel="stylesheet">
-<div>
-    
-  
-</div>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
+        rel="stylesheet">
+    <div>
+
+
+    </div>
 </div>
 
 
@@ -215,6 +237,46 @@
     </div>
 
 </div>
+<div class="modal fade" id="editarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="cafeteria" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese nombre de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese dirección:</label>
+                    <input type="text" class="form-control" formControlName="direccion" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese una imagen de la cafeteria:</label>
+                    <input type="text" class="form-control" formControlName="imagen" placeholder="...">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese descripción:</label>
+                    <input type="text" class="form-control" formControlName="descripcion" placeholder="...">
+                </div>
+
+            </div>
+
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                    (click)="editarCafeteria()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
 <!-- se agrega modal para agregar comida popular -->
 <div class="modal fade" id="agregarPopulares" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -237,8 +299,8 @@
                     <label class="form-label">Ingrese nombre de la cafeteria de la comida popular:</label>
                     <input type="text" class="form-control" formControlName="nombre" placeholder="...">
                 </div>
-                
-                
+
+
 
 
             </div>
@@ -271,7 +333,7 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 
 <!-- se agrega modal para eliminar -->
@@ -291,7 +353,7 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 <!-- se agrega modal para eliminar resena -->
 <div class="modal fade" id="eliminarResena" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -310,5 +372,6 @@
             </div>
         </div>
     </div>
-   
+
 </div>
+<!-- Se agrega modal para editar reseñas -->
