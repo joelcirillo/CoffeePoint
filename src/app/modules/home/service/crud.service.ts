@@ -140,9 +140,10 @@ export class CrudService {
     }
    
   }
-  async editarResena(idCafeteria: string, idResena: string, nuevoPuntaje: number, nuevaResena: string) {
+  async modificarResena(idCafeteria: string, idResena: string, nuevaData: Resena) {
     try {
-      await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(idResena).update({puntuacion: nuevoPuntaje, resena: nuevaResena});
+      return this.database.collection('cafeterias').doc(idCafeteria).collection('resenas').doc(idResena).update(nuevaData)
+
     } catch (error) {
       throw error;
     }

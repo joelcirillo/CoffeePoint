@@ -388,12 +388,16 @@ export class HomeComponent implements AfterViewInit {
   }
  
 
-  guardarEdicionResena() {
-    let nuevoPuntaje: number = 0;
-    let nuevaResena: string = '';
+  editarResena() {
+    let datos: Resena = {
+      idResena: this.resenaSeleccionada.idResena,
+      resena: this.resena.value.resena!,
+      puntuacion: this.resena.value.puntuacion!,
+      
+    }
 
     // Llama a la función de edición de reseña en tu servicio CRUD
-    this.servicioCrud.editarResena(this.cafeteriaSeleccionada.idCafeteria, this.resenaSeleccionada.idResena, nuevoPuntaje, nuevaResena)
+    this.servicioCrud.modificarResena(this.cafeteriaSeleccionada.idCafeteria, this.resenaSeleccionada.idResena, datos)
       .then((resultado) => {
         // Realiza acciones adicionales si es necesario
         console.log("Reseña editada con éxito");
