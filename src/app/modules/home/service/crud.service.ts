@@ -28,7 +28,7 @@ export class CrudService {
     this.cafeteriaColeccion = database.collection('cafeterias')
     this.popularesColeccion = database.collection('populares')
     this.resenaColeccion = database.collection('resenas')
-    this.menuColeccion = database.collection('menus')
+    this.menuColeccion = database.collection('menu')
   }
  
   //funcion para llamar producto
@@ -151,7 +151,7 @@ export class CrudService {
 
   
     //funciones menu
-    obtenerMenus(): Observable<Menu[]> {
+    obtenerMenu(): Observable<Menu[]> {
       return this.menuColeccion.valueChanges();
     }
     obtenerMenuCafeteria(idCafeteria: string): Observable<any[]> {
@@ -161,20 +161,45 @@ export class CrudService {
         .collection('menu')
         .valueChanges();
     }
+    async crearMenu(idCafeteria: string, nuevoPrecio: number, nuevaComida: string, menus: Menu) {
+  try {
+    const id = this.database.createId(); // Verifica si createId() está funcionando como se espera
+    menus.idMenu = id;
+    console.log(id);
+    console.log(menus);
+    const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(id).set(menus);
+  } catch (error) {
+    throw error;
+  }
+}
+    // async crearMenu(idCafeteria: string, nuevoPrecio: number, nuevaComida: string, menus: Menu) {
+    //   try {
+    //     const id = this.database.createId();
+    //     menus.idMenu = id;
+    //     console.log(id)
+    //     console.log(menus)
+    //     const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(id).set(menus);
     
-    crearMenu(idCafeteria: string, nuevaComida: string, nuevoPrecio: number) {
-      if (idCafeteria) {
-        return this.database
-          .collection('cafeterias')
-          .doc(idCafeteria)
-          .collection('menu')
-          .add({ 
-            comida: nuevaComida,
-            precio: nuevoPrecio
-          });
-      } else {
-        console.error('El ID de la cafetería está vacío.');
-        throw new Error('El ID de la cafetería está vacío.');
+        
+    //   } catch (error) {
+    //     throw error;
+    //   }
+    // }
+    async eliminarMenu(idCafeteria: string, idMenu: string) {
+      try {
+        const resp = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(idMenu).delete();
+        return resp;
+      } catch (error) {
+        throw error;
+      }
+     
+    }
+    async modificarMenu(idCafeteria: string, idMenu: string, nuevaData: Menu) {
+      try {
+        return this.database.collection('cafeterias').doc(idCafeteria).collection('menu').doc(idMenu).update(nuevaData)
+  
+      } catch (error) {
+        throw error;
       }
     }
  

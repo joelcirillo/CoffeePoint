@@ -27,6 +27,11 @@
                     data-bs-toggle="modal" data-bs-target="#agregarPopulares">
                     Agregar Popular
                 </button>
+                <button [hidden]="ocultarBotonMenu" type="button" class="btn boton"
+                style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
+                data-bs-toggle="modal" data-bs-target="#agregarMenu">
+                Agregar comida
+            </button>
 
                 <div [hidden]="ocultarCafe" scope="col" class="cuadro">
                     <ul>
@@ -55,7 +60,7 @@
                     <ul>
                         <li *ngFor="let col of coleccionPopulares;  let even = even"
                             [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
-                            {{col.comida}} {{col.precio}}{{col.nombre}}
+                            {{col.comida}} ${{col.precio}} ({{col.nombre}})
 
                             <button type="button" class="btn boton" class="btn btn-outline-danger"
                                 data-bs-toggle="modal" data-bs-target="#eliminarPopulares"
@@ -101,7 +106,7 @@
                                 Eliminar
                             </button>
                             <button type="button" class="btn boton" class="btn btn-outline-primary"
-                                data-bs-toggle="modal" data-bs-target="#editarResena"
+                                data-bs-toggle="modal" data-bs-target="#editarResenaModal"
                                 (click)="mostrarEditarResena(resenas)">
                                 Editar
                             </button>
@@ -114,25 +119,22 @@
                 </div>
                 <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
                     <ul>
-                        <li class="resenatitulo">
-                            <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
-                                <p>Agregar elemento al menú</p>
-                                <p>Precio</p>
-                                <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
-                                    placeholder="Precio" />
-                                <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..."
-                                    name="nuevaComida" type="text" class="form-control"
-                                    style="background-color: #c2806d;" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg">
-                                <button type="submit" class="btn boton"
-                                    style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
-                            </form>
-                        </li>
+                        
 
-                        <li [ngClass]="{'resena-blanco': even, 'resena-amarillo': !even}"
+                        <li [ngClass]="{'menu-amarillo': even, 'menu-blanco': !even}"
                             *ngFor="let menu of menusCafeteria; let even = even">
-                            <p class="resena2">{{menu.comida}}</p>
-                            <p class="resena2">{{menu.precio}}</p>
+                            <p class="resena2 comida">{{menu.comida}}</p>
+                            <p class="resena2">${{menu.precio}}</p>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger"
+                            data-bs-toggle="modal" data-bs-target="#eliminarMenu"
+                            (click)="mostrarBorrarMenu(menu)">
+                            Eliminar
+                        </button>
+                        <button type="button" class="btn boton" class="btn btn-outline-primary"
+                            data-bs-toggle="modal" data-bs-target="#editarMenuModal"
+                            (click)="mostrarEditarMenu(menu)">
+                            Editar
+                        </button>
                         </li>
                     </ul>
                 </div>
@@ -195,7 +197,84 @@
 </div>
 
 
+<!-- modal para menu -->
+<div class="modal fade" id="agregarMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva comida</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
+                <p>Agregar elemento al menú</p>
+                <p>Precio</p>
+                <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
+                    placeholder="Precio" />
+                <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..."
+                    name="nuevaComida" type="text" class="form-control"
+                    style="background-color: #c2806d;" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg">
+                <button type="submit" class="btn boton"
+                    style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
+            </form>
 
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="editarMenuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edite el elmento del menu</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="menu" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese precio nuevamente:</label>
+                    <input type="number" class="form-control" formControlName="precio" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese comida nuevamente:</label>
+                    <input type="text" class="form-control" formControlName="comida" placeholder="...">
+                </div>
+                
+
+            </div>
+
+
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="editarMenu()">Editar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="eliminarMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar este elemento del menu?
+                </h1>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarMenu()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="modal fade" id="agregarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -360,7 +439,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Modal borrar reseñas?
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar esta reseña?
                 </h1>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -374,4 +453,37 @@
     </div>
 
 </div>
-<!-- Se agrega modal para editar reseñas -->
+<div class="modal fade" id="editarResenaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar reseña
+                </h1>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="resena" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese puntaje nuevamente:</label>
+                    <input type="number" class="form-control" formControlName="puntuacion" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese reseña nuevamente:</label>
+                    <input type="text" class="form-control" formControlName="resena" placeholder="...">
+                </div>
+                
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="editarResena()">Editar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

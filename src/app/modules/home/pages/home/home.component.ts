@@ -11,6 +11,7 @@ import * as L from 'leaflet';
 import { latLng, tileLayer, marker, icon } from 'leaflet';
 import { Populares } from 'src/app/models/populares';
 import { Resena } from "src/app/models/resena";
+import { Menu } from "src/app/models/menu";
 
 
 @Component({
@@ -57,9 +58,11 @@ export class HomeComponent implements AfterViewInit {
   coleccionCafeteria: Cafeteria[] = [];
   coleccionPopulares: Populares[] = [];
   coleccionResena: Resena[] = [];
+  coleccionMenu: Menu[] = [];
   cafeteriaSeleccionada!: Cafeteria; // ! -> toma valores vacíos
   popularSeleccionado!: Populares;
   resenaSeleccionada!: Resena;
+  menuSeleccionado!:Menu;
   resenasCafeteria: any[] = [];
   nuevoPuntaje: number =0;
   nuevaResena: string= '';
@@ -89,6 +92,10 @@ export class HomeComponent implements AfterViewInit {
     resena: new FormControl('', Validators.required),
     puntuacion: new FormControl(0, Validators.required),
   })
+  menu = new FormGroup({
+    comida: new FormControl('', Validators.required),
+    precio: new FormControl(0, Validators.required),
+  })
   //definir que mostrar y que no
   ocultarMapa: boolean = false;
   ocultarImagen: boolean = true;
@@ -101,6 +108,7 @@ export class HomeComponent implements AfterViewInit {
   ocultarResenas: boolean = true;
   ocultarBotonPopulares: boolean= true;
   ocultarBotonAgregar: boolean= false;
+  ocultarBotonMenu: boolean= true;
   //primera cafeteria
   mostrarCafeteria() {
     
@@ -115,6 +123,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = true;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
+    this.ocultarBotonMenu= true;
 
   }
   volver() {
@@ -129,6 +138,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = true;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= false;
+    this.ocultarBotonMenu= true;
     
 
   }
@@ -144,6 +154,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = true;
     this.ocultarBotonPopulares= false;
     this.ocultarBotonAgregar= true;
+    this.ocultarBotonMenu= true;
 
   }
   mostrarMenuPersonal() {
@@ -158,6 +169,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = true;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
+    this.ocultarBotonMenu= false;
 
   }
   mostrarCafeterias() {
@@ -172,6 +184,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = true;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= false;
+    this.ocultarBotonMenu= true;
 
   }
   mostrarResenas() {
@@ -186,6 +199,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarResenas = false;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
+    this.ocultarBotonMenu= true;
 
   }
   
@@ -203,6 +217,7 @@ export class HomeComponent implements AfterViewInit {
     this.obtenerCafeterias();
     this.obtenerPopulares();
     this.obtenerResenas();
+    this.obtenerMenu();
   }
   //funcionalidad para populares
   async agregarPopulares() {
@@ -256,6 +271,16 @@ export class HomeComponent implements AfterViewInit {
       },
       (error) => {
         console.error('Error al obtener cafeterías: ', error);
+      }
+    );
+  }
+  obtenerMenu() {
+    this.servicioCrud.obtenerMenu().subscribe(
+      (menus: any[]) => {
+        this.coleccionMenu = menus;
+      },
+      (error) => {
+        console.error('Error al obtener menu: ', error);
       }
     );
   }
@@ -379,12 +404,14 @@ export class HomeComponent implements AfterViewInit {
     this.nuevaResena = ''; 
   }
   //editar reseñas
-  mostrarEditarResena(resena: any) {
-    this.resenaSeleccionada = resena;
+  mostrarEditarResena(resenaSeleccionada: any) {
+    this.resenaSeleccionada = resenaSeleccionada;
     this.resena.setValue({
       puntuacion: this.resenaSeleccionada.puntuacion,
       resena: this.resenaSeleccionada.resena,
+      
     });
+    console.log("editar reseña modal visible")
   }
  
 
@@ -427,17 +454,63 @@ export class HomeComponent implements AfterViewInit {
   }
   //mostrar menu
   mostrarMenudeCafeteriaSeleccionada(idCafeteria: string) {
+
     this.servicioCrud
       .obtenerMenuCafeteria(idCafeteria)
-      .subscribe(menus => {
-        this.menusCafeteria= menus;
+      .subscribe(menu => {
+        this.menusCafeteria= menu;
+        console.log(menu)
       });
   }
   agregarMenu(idCafeteria: string) {
     console.log('ID de la cafetería seleccionada:', idCafeteria);
-    this.servicioCrud.crearMenu(idCafeteria, this.nuevaComida, this.nuevoPrecio);
-    this.nuevoPrecio = 0; // Restablece el precio después de agregar el elemento al menú
-    this.nuevaComida = ''; // Borra el nombre de la comida después de agregarla al menú
+    const menus: Menu = { idMenu: '', precio: this.nuevoPrecio, comida: this.nuevaComida };
+    this.servicioCrud.crearMenu(idCafeteria, this.nuevoPrecio, this.nuevaComida, menus);
+    this.nuevoPrecio = 0; // Restablece el puntaje después de agregar la reseña
+    this.nuevaComida = ''; 
+  }
+  borrarMenu(){
+    console.log(this.idCafeteriaSeleccionada, this.menuSeleccionado.idMenu)
+    console.log("La función borrar Menu se está ejecutando");
+    this.servicioCrud.eliminarMenu(this.idCafeteriaSeleccionada, this.menuSeleccionado.idMenu)
+      .then((resultado) => {
+        // Realiza acciones adicionales si es necesario
+      })
+      .catch((error) => {
+        // Maneja el error de acuerdo con la lógica de tu aplicación
+      });
+  }
+  editarMenu() {
+    let datos: Menu = {
+      idMenu: this.menuSeleccionado.idMenu,
+      comida: this.menu.value.comida!,
+      precio: this.menu.value.precio!,
+      
+    }
+
+    // Llama a la función de edición de reseña en tu servicio CRUD
+    this.servicioCrud.modificarMenu(this.cafeteriaSeleccionada.idCafeteria, this.menuSeleccionado.idMenu, datos)
+      .then((resultado) => {
+        // Realiza acciones adicionales si es necesario
+        console.log("Menu editado con éxito");
+      })
+      .catch((error) => {
+        // Maneja el error de acuerdo con la lógica de tu aplicación
+        console.error("Error al editar el menu:", error);
+      });
+  }
+  mostrarEditarMenu(menuSeleccionado: any) {
+    this.menuSeleccionado = menuSeleccionado;
+    this.menu.setValue({
+      precio: this.menuSeleccionado.precio,
+      comida: this.menuSeleccionado.comida,
+      
+    });
+    console.log("editar menu modal visible")
+  }
+  mostrarBorrarMenu(menuSeleccionado: any) {
+    this.modalVisibleResena = true;
+    this.menuSeleccionado = menuSeleccionado;
   }
 
  

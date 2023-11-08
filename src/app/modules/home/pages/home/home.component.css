@@ -128,6 +128,22 @@ li{
     height: 230px;
     font-size: 20px;
 }
+.menu-blanco{
+    
+    background-color: #FFF;
+    height: 160px;
+    font-size: 20px;
+}
+.menu-amarillo{
+    
+    background-color: #feefc6;
+    height: 160px;
+    font-size: 20px;
+}
+.comida{
+    margin: 0;
+    font-size: 25px;
+}
 .like{
     float: right;
     height: 25px;
