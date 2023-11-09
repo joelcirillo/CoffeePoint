@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { Cafeteria } from 'src/app/models/cafeteria';
 import { Observable } from 'rxjs';
 import { Populares } from 'src/app/models/populares';
+import { Resena } from 'src/app/models/resena';
+import { Menu } from "src/app/models/menu";
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +22,13 @@ export class CrudService {
 
   private cafeteriaColeccion: AngularFirestoreCollection<Cafeteria>
   private popularesColeccion: AngularFirestoreCollection<Populares>
+  private resenaColeccion: AngularFirestoreCollection<Resena>
+  private menuColeccion: AngularFirestoreCollection<Menu>
   constructor(private database: AngularFirestore) {
     this.cafeteriaColeccion = database.collection('cafeterias')
     this.popularesColeccion = database.collection('populares')
+    this.resenaColeccion = database.collection('resenas')
+    this.menuColeccion = database.collection('menu')
   }
  
   //funcion para llamar producto
@@ -96,4 +102,107 @@ export class CrudService {
       }
     })
   }
+  //funcion para llamar reseñas
+  obtenerResenas(): Observable<Resena[]> {
+    return this.resenaColeccion.valueChanges();
+  }
+  
+  //funciones de reseñas
+  obtenerResenasdeCafeterias(idCafeteria: string): Observable<any[]> {
+    return this.database
+      .collection('cafeterias')
+      .doc(idCafeteria)
+      .collection('resenas')
+      .valueChanges();
+  }
+  async crearResena(idCafeteria: string, nuevoPuntaje: number, nuevaResena: string, resenas: Resena) {
+    try {
+      const id = this.database.createId();
+      resenas.idResena = id;
+      console.log(id)
+      console.log(resenas)
+      const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(id).set(resenas);
+  
+      
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  
+  
+  async eliminarResena(idCafeteria: string, idResena: string) {
+    try {
+      const resp = await this.cafeteriaColeccion.doc(idCafeteria).collection('resenas').doc(idResena).delete();
+      return resp;
+    } catch (error) {
+      throw error;
+    }
+   
+  }
+  async modificarResena(idCafeteria: string, idResena: string, nuevaData: Resena) {
+    try {
+      return this.database.collection('cafeterias').doc(idCafeteria).collection('resenas').doc(idResena).update(nuevaData)
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  
+    //funciones menu
+    obtenerMenu(): Observable<Menu[]> {
+      return this.menuColeccion.valueChanges();
+    }
+    obtenerMenuCafeteria(idCafeteria: string): Observable<any[]> {
+      return this.database
+        .collection('cafeterias')
+        .doc(idCafeteria)
+        .collection('menu')
+        .valueChanges();
+    }
+    async crearMenu(idCafeteria: string, nuevoPrecio: number, nuevaComida: string, menus: Menu) {
+  try {
+    const id = this.database.createId(); // Verifica si createId() está funcionando como se espera
+    menus.idMenu = id;
+    console.log(id);
+    console.log(menus);
+    const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(id).set(menus);
+  } catch (error) {
+    throw error;
+  }
+}
+    // async crearMenu(idCafeteria: string, nuevoPrecio: number, nuevaComida: string, menus: Menu) {
+    //   try {
+    //     const id = this.database.createId();
+    //     menus.idMenu = id;
+    //     console.log(id)
+    //     console.log(menus)
+    //     const resultado = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(id).set(menus);
+    
+        
+    //   } catch (error) {
+    //     throw error;
+    //   }
+    // }
+    async eliminarMenu(idCafeteria: string, idMenu: string) {
+      try {
+        const resp = await this.cafeteriaColeccion.doc(idCafeteria).collection('menu').doc(idMenu).delete();
+        return resp;
+      } catch (error) {
+        throw error;
+      }
+     
+    }
+    async modificarMenu(idCafeteria: string, idMenu: string, nuevaData: Menu) {
+      try {
+        return this.database.collection('cafeterias').doc(idCafeteria).collection('menu').doc(idMenu).update(nuevaData)
+  
+      } catch (error) {
+        throw error;
+      }
+    }
+ // promedio reseñas
+ 
+ 
 }
