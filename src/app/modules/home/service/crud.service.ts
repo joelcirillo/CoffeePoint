@@ -202,6 +202,7 @@ export class CrudService {
         throw error;
       }
     }
+ // promedio reseñas
  
  
 }

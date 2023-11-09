@@ -12,6 +12,7 @@ import { latLng, tileLayer, marker, icon } from 'leaflet';
 import { Populares } from 'src/app/models/populares';
 import { Resena } from "src/app/models/resena";
 import { Menu } from "src/app/models/menu";
+import { ResenaCafeteria } from "src/app/models/resenascafeteria";
 
 
 @Component({
@@ -30,14 +31,14 @@ export class HomeComponent implements AfterViewInit {
       popupAnchor: [-3, -76] // Punto donde aparecerá el popup en relación con el icono
     });
 
-    let map = L.map('map').setView([51.505, -0.09], 13);
+    let map = L.map('map').setView([-38.93993532247614, -67.99217337786433], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
 
-    L.marker([51.5, -0.09], { icon: myIcon }).addTo(map);
+    L.marker([-38.93993532247614, -67.99217337786433], { icon: myIcon }).addTo(map);
   }
 
   //mapa leaflet
@@ -45,14 +46,14 @@ export class HomeComponent implements AfterViewInit {
     this.initializeMap();
   }
   private initializeMap(): void {
-    const map = L.map('map').setView([51.505, -0.09], 13);
+    const map = L.map('map').setView([-38.93993532247614, -67.99217337786433], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    L.marker([51.5, -0.09]).addTo(map)
-      .bindPopup('¡Hola, este es un marcador de ejemplo!')
+    L.marker([-38.93993532247614, -67.99217337786433]).addTo(map)// poner variable
+      .bindPopup('Estación Margus')
       .openPopup();
   }
   coleccionCafeteria: Cafeteria[] = [];
@@ -116,11 +117,11 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarImagen = false;
     this.ocultarMenuGeneral = true;
     this.ocultarMenuPersonal = true;
-    this.ocultarCafe = false;
+    this.ocultarCafe = true;
     this.ocultarBotonMenuGeneral = true;
     this.ocultarBotonMenuPersonal = false;
     this.ocultarBotonResenas = false;
-    this.ocultarResenas = true;
+    this.ocultarResenas = false;
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
     this.ocultarBotonMenu= true;
@@ -211,9 +212,10 @@ export class HomeComponent implements AfterViewInit {
     public dialog: MatDialog,
     
   ) { }
-
+  
 
   ngOnInit() {
+
     this.obtenerCafeterias();
     this.obtenerPopulares();
     this.obtenerResenas();
@@ -242,6 +244,33 @@ export class HomeComponent implements AfterViewInit {
   mostrarBorrarPopulares(popularSeleccionado: any) { //mostrar
     this.modalVisibleProducto = true;
     this.popularSeleccionado = popularSeleccionado;
+  }
+  mostrarEditarPopulares(popularSeleccionado: any) {
+    this.popularSeleccionado = popularSeleccionado;
+    this.populares.setValue({
+      nombre: popularSeleccionado.nombre,
+      comida: popularSeleccionado.comida,
+      precio: popularSeleccionado.precio,
+      
+    })
+
+
+  }
+  editarPopulares() {
+    let datos: Populares = {
+      idPopulares: this.popularSeleccionado.idPopulares,
+      nombre: this.populares.value.nombre!,
+      comida: this.populares.value.comida!,
+      precio:this.populares.value.precio!
+      
+    }
+    this.servicioCrud.modificarPopulares(this.popularSeleccionado.idPopulares, datos)
+      .then(producto => {
+        alert("La comida popular fue modificada con exito.");
+      })
+      .catch(error => {
+        alert("No se pudo modificar la comida popular \n" + error)
+      })
   }
 
   obtenerCafeterias() {
@@ -511,6 +540,14 @@ export class HomeComponent implements AfterViewInit {
   mostrarBorrarMenu(menuSeleccionado: any) {
     this.modalVisibleResena = true;
     this.menuSeleccionado = menuSeleccionado;
+  }
+  // promedio de reseñas
+  calcularPromedio(resenasCafeteria: ResenaCafeteria[]) {
+    let sum = 0;
+    resenasCafeteria.forEach((resena) => {
+      sum += resena.puntuacion;
+    });
+    return (sum / resenasCafeteria.length).toFixed(1);
   }
 
  

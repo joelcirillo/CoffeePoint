@@ -61,7 +61,10 @@
                         <li *ngFor="let col of coleccionPopulares;  let even = even"
                             [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
                             {{col.comida}} ${{col.precio}} ({{col.nombre}})
-
+                            <button type="button" class="btn boton" class="btn btn-outline-success"
+                            data-bs-toggle="modal" data-bs-target="#editarPopulares" (click)="mostrarEditarPopulares(col)">
+                            Editar
+                        </button>
                             <button type="button" class="btn boton" class="btn btn-outline-danger"
                                 data-bs-toggle="modal" data-bs-target="#eliminarPopulares"
                                 (click)="mostrarBorrarPopulares(col)">
@@ -77,12 +80,12 @@
                 <div [hidden]="ocultarResenas" class="cuadro menu">
                     <ul>
                         <li class="resenatitulo">
-                            <h2 class="numero">3,9<img src="../../../../../assets/estrellas.png"
+                            <h2 class="numero">{{ calcularPromedio(resenasCafeteria) }}<img src="../../../../../assets/estrellas.png"
                                     style=" padding-left: 20px; width: 180px;" alt=""></h2>
-                            <p style="margin: 0;">20 reseñas</p>
+                            <p style="margin: 0;">{{ resenasCafeteria.length }} reseñas</p>
                             <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
                                 <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input
-                                    type="number" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje"
+                                    type="number" min="1" max="5" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje"
                                     placeholder="Puntaje" />
                                 <input [(ngModel)]="nuevaResena" placeholder="Escribir tu opinón..." name="nuevaResena"
                                     type="text" class="form-control" style="background-color: #c2806d;"
@@ -208,7 +211,7 @@
             <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
                 <p>Agregar elemento al menú</p>
                 <p>Precio</p>
-                <input type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
+                <input type="number"  min="1" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
                     placeholder="Precio" />
                 <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..."
                     name="nuevaComida" type="text" class="form-control"
@@ -237,7 +240,7 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese precio nuevamente:</label>
-                    <input type="number" class="form-control" formControlName="precio" placeholder="...">
+                    <input type="number" min="1"  class="form-control" formControlName="precio" placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese comida nuevamente:</label>
@@ -372,7 +375,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese precio:</label>
-                    <input type="text" class="form-control" formControlName="precio" placeholder="...">
+                    <input type="number" min="1"  class="form-control" formControlName="precio" placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese nombre de la cafeteria de la comida popular:</label>
@@ -414,7 +417,43 @@
     </div>
 
 </div>
+<!-- se agrega modal para editar comida popular -->
+<div class="modal fade" id="editarPopulares" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div [formGroup]="populares" class="modal-body">
+                <!-- Recibe los nuevos valores -->
+                <div class="mb-3">
+                    <label class="form-label">Ingrese nombre de la comida popular:</label>
+                    <input type="text" class="form-control" formControlName="comida" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese precio:</label>
+                    <input type="text" min="1" class="form-control" formControlName="precio" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese nombre de la cafeteria de la comida popular:</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="...">
+                </div>
 
+
+            </div>
+
+            <!-- Corresponde a las ACCIONES -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                    (click)="editarPopulares()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
 <!-- se agrega modal para eliminar -->
 <div class="modal fade" id="eliminarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -466,7 +505,7 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese puntaje nuevamente:</label>
-                    <input type="number" class="form-control" formControlName="puntuacion" placeholder="...">
+                    <input type="number"  min="1" max="5" class="form-control" formControlName="puntuacion" placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese reseña nuevamente:</label>
