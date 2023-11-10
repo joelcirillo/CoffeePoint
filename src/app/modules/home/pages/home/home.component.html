@@ -1,5 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link
     href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
     rel="stylesheet">
@@ -141,7 +142,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="input-group input-group-lg barra" style="width: 500px;">
+                <div class="input-group input-group-lg barra">
                     <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
                             style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
                     <input type="text" class="form-control" style="background-color: #c2806d;"
@@ -151,7 +152,7 @@
             </div>
             <!-- Segunda columna -->
             <div class="col-sm-6">
-                <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+                <div id="map" [hidden]="ocultarMapa" class="mapa" ></div>
                 <div *ngIf="cafeteriaSeleccionada" [hidden]="ocultarImagen">
                     <img src="../../../../../assets/volver.png" (click)="volver()" alt=""
                         style="height: 40px; margin-left: 80px;" srcset="">
