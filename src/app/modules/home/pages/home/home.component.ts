@@ -380,6 +380,7 @@ export class HomeComponent implements AfterViewInit {
   }
   borrarCafeteria() {
     this.servicioCrud.eliminarCafeteria(this.cafeteriaSeleccionada.idCafeteria)
+    
       .then(respuesta => {
         alert("La cafeteria se ha eliminado con exito.");
       })

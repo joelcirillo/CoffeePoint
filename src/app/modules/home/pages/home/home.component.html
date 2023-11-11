@@ -155,11 +155,11 @@
                 <div id="map" [hidden]="ocultarMapa" class="mapa" ></div>
                 <div *ngIf="cafeteriaSeleccionada" [hidden]="ocultarImagen">
                     <img src="../../../../../assets/volver.png" (click)="volver()" alt=""
-                        style="height: 40px; margin-left: 80px;" srcset="">
+                        style="height: 40px; " srcset="">
                     <h2 class="titulocafe">{{cafeteriaSeleccionada.nombre}}</h2>
 
                     <img src="{{cafeteriaSeleccionada.imagen}}" class="imagen" alt="">
-                    <p style="margin-left: 80px; font-size: 17px;">
+                    <p style=" font-size: 17px;" class="descripcioncafe">
                         {{cafeteriaSeleccionada.descripcion}}
                     </p>
 

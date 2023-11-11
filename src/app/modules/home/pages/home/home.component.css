@@ -1,9 +1,19 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
     box-sizing: border-box;
+    
+    
    
 }
+body {
+    overflow-x: hidden;
+}
+.container{
+   
+    margin: 0;
+}
 .fondo{
+    margin: 0;
     background-color: #feefc6;
 }
 .imagen{
@@ -22,11 +32,7 @@
     margin-right: 10px;
     text-align: center;
 }
-.container{
-    margin-left: 10px;
-    
-   
-}
+
 
 .barra{
     margin-left: 140px;
@@ -140,7 +146,6 @@ li{
     float: right;
     height: 25px;
     margin-left: 20px;
-    margin-right: 10px
 }
 .mapa{
     margin-top: 40px;
@@ -151,6 +156,9 @@ li{
 @import '~leaflet/dist/leaflet.css';
 
 @media only screen and (max-width: 600px) {
+    *{
+        margin: 0;
+    }
     .imagen {
         width: 100%;
         height: auto;
@@ -174,8 +182,14 @@ li{
     .cuadro {
         width: 100%;
         margin: 30px 0;
-    }
 
+    }
+    .resena-blanco{
+        height: 250px;
+    }
+    .resena-amarillo{
+        height: 250px;
+    }
     .resenatitulo {
         height: auto;
     }
@@ -195,15 +209,15 @@ li{
     .imagen {
         width: 80%;
         margin-left: 10%;
+        
+        
     }
     .mapa {
         width: 80%;
-        margin-left: 10%;
+     
     }
 
-    .titulocafe {
-        margin-left: 10%;
-    }
+    
 
     .barra {
         width: 80%;
@@ -232,9 +246,11 @@ li{
         height: 420px;
         margin-left: 80px;
     }
-
+    .descripcioncafe{
+        margin-left: 70px;
+    }
     .titulocafe {
-        margin-left: 250px;
+        margin-left:70px;
     }
 
     .barra {
