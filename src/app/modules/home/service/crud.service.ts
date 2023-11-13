@@ -202,7 +202,26 @@ export class CrudService {
         throw error;
       }
     }
- // promedio reseñas
+ //funcion para buscar cafeterias
+ buscarCafeterias(termino: string): Observable<any[]> {
+  // Realiza la consulta a Firestore
+  return this.database
+    .collection('cafeterias', (ref) =>
+      ref
+        .where('nombre', '>=', termino)
+        .where('nombre', '<=', termino + '\uf8ff')
+    )
+    .snapshotChanges()
+    .pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as any;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+}
  
  
 }
