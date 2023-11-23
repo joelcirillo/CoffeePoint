@@ -1,5 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link
     href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua&family=Josefin+Sans&family=PT+Serif:wght@700&display=swap"
     rel="stylesheet">
@@ -28,10 +29,10 @@
                     Agregar Popular
                 </button>
                 <button [hidden]="ocultarBotonMenu" type="button" class="btn boton"
-                style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
-                data-bs-toggle="modal" data-bs-target="#agregarMenu">
-                Agregar comida
-            </button>
+                    style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
+                    data-bs-toggle="modal" data-bs-target="#agregarMenu">
+                    Agregar comida
+                </button>
 
                 <div [hidden]="ocultarCafe" scope="col" class="cuadro">
                     <ul>
@@ -62,9 +63,10 @@
                             [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
                             {{col.comida}} ${{col.precio}} ({{col.nombre}})
                             <button type="button" class="btn boton" class="btn btn-outline-success"
-                            data-bs-toggle="modal" data-bs-target="#editarPopulares" (click)="mostrarEditarPopulares(col)">
-                            Editar
-                        </button>
+                                data-bs-toggle="modal" data-bs-target="#editarPopulares"
+                                (click)="mostrarEditarPopulares(col)">
+                                Editar
+                            </button>
                             <button type="button" class="btn boton" class="btn btn-outline-danger"
                                 data-bs-toggle="modal" data-bs-target="#eliminarPopulares"
                                 (click)="mostrarBorrarPopulares(col)">
@@ -80,8 +82,9 @@
                 <div [hidden]="ocultarResenas" class="cuadro menu">
                     <ul>
                         <li class="resenatitulo">
-                            <h2 class="numero">{{ calcularPromedio(resenasCafeteria) }}<img src="../../../../../assets/estrellas.png"
-                                    style=" padding-left: 20px; width: 180px;" alt=""></h2>
+                            <h2 class="numero">{{ calcularPromedio(resenasCafeteria) }}<img
+                                    src="../../../../../assets/estrellas.png" style=" padding-left: 20px; width: 180px;"
+                                    alt=""></h2>
                             <p style="margin: 0;">{{ resenasCafeteria.length }} reseñas</p>
                             <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
                                 <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input
@@ -122,43 +125,62 @@
                 </div>
                 <div [hidden]="ocultarMenuPersonal" class="cuadro menu">
                     <ul>
-                        
+
 
                         <li [ngClass]="{'menu-amarillo': even, 'menu-blanco': !even}"
                             *ngFor="let menu of menusCafeteria; let even = even">
                             <p class="resena2 comida">{{menu.comida}}</p>
                             <p class="resena2">${{menu.precio}}</p>
                             <button type="button" class="btn boton" class="btn btn-outline-danger"
-                            data-bs-toggle="modal" data-bs-target="#eliminarMenu"
-                            (click)="mostrarBorrarMenu(menu)">
-                            Eliminar
-                        </button>
-                        <button type="button" class="btn boton" class="btn btn-outline-primary"
-                            data-bs-toggle="modal" data-bs-target="#editarMenuModal"
-                            (click)="mostrarEditarMenu(menu)">
-                            Editar
-                        </button>
+                                data-bs-toggle="modal" data-bs-target="#eliminarMenu" (click)="mostrarBorrarMenu(menu)">
+                                Eliminar
+                            </button>
+                            <button type="button" class="btn boton" class="btn btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#editarMenuModal"
+                                (click)="mostrarEditarMenu(menu)">
+                                Editar
+                            </button>
                         </li>
                     </ul>
                 </div>
-                <div class="input-group input-group-lg barra" style="width: 500px;">
+                <div class="cuadro" [hidden]="ocultarResultadosCafeteria">
+                    <ul>
+                        <li *ngFor="let resultado of resultados;  let even = even"
+                            [ngClass]="{'titulo-amarillo': even, 'titulo-blanco': !even}">
+                            <a
+                                (click)="mostrarCafeteria();mostrarCafeteriaSeleccionada(resultado.idCafeteria);mostrarResenasdeCafeteriaSeleccionada(resultado.idCafeteria);mostrarMenudeCafeteriaSeleccionada(resultado.idCafeteria);seleccionarCafeteria(resultado.idCafeteria);">{{resultado.nombre}}</a>
+                            <p [ngClass]="{'subtitulo-amarillo': even, 'subtitulo-blanco': !even}">
+                                {{resultado.direccion}}</p>
+                            <button type="button" class="btn boton" class="btn btn-outline-success"
+                                data-bs-toggle="modal" data-bs-target="#editarCafeteria" (click)="mostrarEditar(resultado)">
+                                Editar
+                            </button>
+                            <button type="button" class="btn boton" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#eliminarCafeteria" (click)="mostrarBorrar(resultado)">
+                                Eliminar
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div [hidden]="ocultarBarradeBusquedaCafe" class="input-group input-group-lg barra">
                     <span class="input-group-text" style="background-color: #a55e49;" id="inputGroup-sizing-lg"><img
                             style="height: 25px;" src="../../../assets/lupa.png" alt=""></span>
-                    <input type="text" class="form-control" style="background-color: #c2806d;"
-                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    <input type="text" placeholder="Busca tu cafetería aqui..." class="form-control" style="background-color: #c2806d;"
+                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+                        [(ngModel)]="terminoBusqueda" (keyup.enter)="buscar()" />
 
                 </div>
             </div>
             <!-- Segunda columna -->
             <div class="col-sm-6">
-                <div id="map" [hidden]="ocultarMapa" style="height: 460px; width: 680px;padding: 10px;"></div>
+                <div id="map" [hidden]="ocultarMapa" class="mapa"></div>
                 <div *ngIf="cafeteriaSeleccionada" [hidden]="ocultarImagen">
-                    <img src="../../../../../assets/volver.png" (click)="volver()" alt=""
-                        style="height: 40px; margin-left: 80px;" srcset="">
+                    <img src="../../../../../assets/volver.png" (click)="volver()" alt="" style="height: 40px; "
+                        srcset="">
                     <h2 class="titulocafe">{{cafeteriaSeleccionada.nombre}}</h2>
 
                     <img src="{{cafeteriaSeleccionada.imagen}}" class="imagen" alt="">
-                    <p style="margin-left: 80px; font-size: 17px;">
+                    <p style=" font-size: 17px;" class="descripcioncafe">
                         {{cafeteriaSeleccionada.descripcion}}
                     </p>
 
@@ -211,12 +233,10 @@
             <form (ngSubmit)="agregarMenu(idCafeteriaSeleccionada)">
                 <p>Agregar elemento al menú</p>
                 <p>Precio</p>
-                <input type="number"  min="1" [(ngModel)]="nuevoPrecio" name="nuevoPrecio"
-                    placeholder="Precio" />
-                <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..."
-                    name="nuevaComida" type="text" class="form-control"
-                    style="background-color: #c2806d;" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-lg">
+                <input type="number" min="1" [(ngModel)]="nuevoPrecio" name="nuevoPrecio" placeholder="Precio" />
+                <input [(ngModel)]="nuevaComida" placeholder="Escribir nombre de la comida..." name="nuevaComida"
+                    type="text" class="form-control" style="background-color: #c2806d;"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 <button type="submit" class="btn boton"
                     style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
             </form>
@@ -240,13 +260,13 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese precio nuevamente:</label>
-                    <input type="number" min="1"  class="form-control" formControlName="precio" placeholder="...">
+                    <input type="number" min="1" class="form-control" formControlName="precio" placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese comida nuevamente:</label>
                     <input type="text" class="form-control" formControlName="comida" placeholder="...">
                 </div>
-                
+
 
             </div>
 
@@ -272,7 +292,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="borrarMenu()">Eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarMenu()" data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
@@ -375,7 +395,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese precio:</label>
-                    <input type="number" min="1"  class="form-control" formControlName="precio" placeholder="...">
+                    <input type="number" min="1" class="form-control" formControlName="precio" placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese nombre de la cafeteria de la comida popular:</label>
@@ -411,7 +431,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="borrarPopulares()">Eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarPopulares()" data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
@@ -467,7 +487,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="borrarCafeteria()">Eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarCafeteria()" data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
@@ -486,7 +506,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="borrarResena()">Eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="borrarResena()" data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
@@ -505,24 +525,22 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese puntaje nuevamente:</label>
-                    <input type="number"  min="1" max="5" class="form-control" formControlName="puntuacion" placeholder="...">
+                    <input type="number" min="1" max="5" class="form-control" formControlName="puntuacion"
+                        placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese reseña nuevamente:</label>
                     <input type="text" class="form-control" formControlName="resena" placeholder="...">
                 </div>
-                
+
 
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="editarResena()">Editar</button>
+                <button type="button" class="btn btn-primary" (click)="editarResena()" data-bs-dismiss="modal">Editar</button>
             </div>
         </div>
     </div>
 
 </div>
-
-
-

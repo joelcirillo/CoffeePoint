@@ -43,12 +43,19 @@ a{
     background: white; /* Cambia el fondo a blanco al pasar el mouse sobre el botón */
     color: black; /* Cambia el color del texto a negro al pasar el mouse sobre el botón */
 }
-/* .texto-superpuesto {
-    position: absolute;
-    top: 50%; /* Ajusta la posición vertical según tus preferencias 
-    left: 50%; /* Ajusta la posición horizontal según tus preferencias 
-    transform: translate(-50%, -50%); /* Centra el texto en el centro del contenedor 
-    color: #fff; /* Color del texto 
-    padding: 10px; /* Espaciado alrededor del texto
-    z-index: 1; /* Asegura que el texto esté por encima de la imagen 
-} */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+        padding-top: 50px;
+    }
+
+    p {
+        font-size: 18px;
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+
+    a, .boton1 {
+        font-size: 20px;
+    }
+}

@@ -55,6 +55,12 @@ export class HomeComponent implements AfterViewInit {
     L.marker([-38.93993532247614, -67.99217337786433]).addTo(map)// poner variable
       .bindPopup('Estación Margus')
       .openPopup();
+      L.marker([-38.938821187047125, -67.99516673862628]).addTo(map)// poner variable
+      .bindPopup('Havanna')
+      .openPopup();
+      L.marker([-38.938307423125835, -67.99745297488013]).addTo(map)// poner variable
+      .bindPopup('Bar 1946')
+      .openPopup();
   }
   coleccionCafeteria: Cafeteria[] = [];
   coleccionPopulares: Populares[] = [];
@@ -110,6 +116,8 @@ export class HomeComponent implements AfterViewInit {
   ocultarBotonPopulares: boolean= true;
   ocultarBotonAgregar: boolean= false;
   ocultarBotonMenu: boolean= true;
+  ocultarResultadosCafeteria: boolean= true;
+  ocultarBarradeBusquedaCafe:boolean=false;
   //primera cafeteria
   mostrarCafeteria() {
     
@@ -125,6 +133,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
     this.ocultarBotonMenu= true;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=true;
 
   }
   volver() {
@@ -140,6 +150,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= false;
     this.ocultarBotonMenu= true;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=false;
     
 
   }
@@ -156,6 +168,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= false;
     this.ocultarBotonAgregar= true;
     this.ocultarBotonMenu= true;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=true;
 
   }
   mostrarMenuPersonal() {
@@ -171,6 +185,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
     this.ocultarBotonMenu= false;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=true;
 
   }
   mostrarCafeterias() {
@@ -186,6 +202,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= false;
     this.ocultarBotonMenu= true;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=false;
 
   }
   mostrarResenas() {
@@ -201,6 +219,8 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBotonPopulares= true;
     this.ocultarBotonAgregar= true;
     this.ocultarBotonMenu= true;
+    this.ocultarResultadosCafeteria= true;
+    this.ocultarBarradeBusquedaCafe=true;
 
   }
   
@@ -234,6 +254,7 @@ export class HomeComponent implements AfterViewInit {
       // ENVIAMOS NUESTRO NUEVO PRODUCTO
       await this.servicioCrud.crearPopulares(nuevaPopulares)
         .then(populares => {
+          
           alert("Ha agregado una nueva comida popular con exito :)");
         })
         .catch(error => {
@@ -380,6 +401,7 @@ export class HomeComponent implements AfterViewInit {
   }
   borrarCafeteria() {
     this.servicioCrud.eliminarCafeteria(this.cafeteriaSeleccionada.idCafeteria)
+    
       .then(respuesta => {
         alert("La cafeteria se ha eliminado con exito.");
       })
@@ -549,6 +571,33 @@ export class HomeComponent implements AfterViewInit {
     });
     return (sum / resenasCafeteria.length).toFixed(1);
   }
+//funcion para buscar con la barra de busqueda
+resultados: any[] = [];
+  terminoBusqueda: string = '';
+buscar() {
+  this.ocultarBotonResenas = true;
+  this.ocultarMapa = false;
+  this.ocultarMenuGeneral = true;
+  this.ocultarCafe = true;
+  this.ocultarImagen = true;
+  this.ocultarMenuPersonal = true;
+  this.ocultarBotonMenuPersonal = true;
+  this.ocultarBotonMenuGeneral = false;
+  this.ocultarResenas = true;
+  this.ocultarBotonPopulares= true;
+  this.ocultarBotonAgregar= false;
+  this.ocultarBotonMenu= true;
+  this.ocultarResultadosCafeteria= false;
+  this.ocultarBarradeBusquedaCafe= false;
+  this.servicioCrud.buscarCafeterias(this.terminoBusqueda).subscribe(
+    (resultados) => {
+      this.resultados = resultados;
+    },
+    (error) => {
+      console.error('Error al buscar', error);
+    }
+  );
+}
 
  
   }
