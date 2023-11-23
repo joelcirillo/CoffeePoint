@@ -2,7 +2,7 @@
     border: 10px double;
     border-radius: 20px;
     max-width: 90%; /* Cambiado de width a max-width */
-    height: 400px; /* Cambiado de height a auto para mantener la proporción */
+    height: 600px; /* Cambiado de height a auto para mantener la proporción */
     width: 400px;
     color: #893920;
 }
@@ -42,3 +42,4 @@
         max-width: none; /* Eliminado el max-width para que ocupe el ancho completo en pantallas pequeñas */
     }
 }
+
