@@ -55,6 +55,12 @@ export class HomeComponent implements AfterViewInit {
     L.marker([-38.93993532247614, -67.99217337786433]).addTo(map)// poner variable
       .bindPopup('Estación Margus')
       .openPopup();
+      L.marker([-38.938821187047125, -67.99516673862628]).addTo(map)// poner variable
+      .bindPopup('Havanna')
+      .openPopup();
+      L.marker([-38.938307423125835, -67.99745297488013]).addTo(map)// poner variable
+      .bindPopup('Bar 1946')
+      .openPopup();
   }
   coleccionCafeteria: Cafeteria[] = [];
   coleccionPopulares: Populares[] = [];
@@ -248,6 +254,7 @@ export class HomeComponent implements AfterViewInit {
       // ENVIAMOS NUESTRO NUEVO PRODUCTO
       await this.servicioCrud.crearPopulares(nuevaPopulares)
         .then(populares => {
+          
           alert("Ha agregado una nueva comida popular con exito :)");
         })
         .catch(error => {

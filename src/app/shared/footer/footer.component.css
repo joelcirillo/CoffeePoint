@@ -11,3 +11,8 @@ padding-top: 10px;
     height: 50px;
     margin-top: 40px;
 }
+
+button{
+    background-color: #00000000;
+    border: 0;
+}
