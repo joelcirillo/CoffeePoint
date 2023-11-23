@@ -1,7 +1,19 @@
 *{
     font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+    
+    
+   
+}
+body {
+    overflow-x: hidden;
+}
+.container{
+   
+    margin: 0;
 }
 .fondo{
+    margin: 0;
     background-color: #feefc6;
 }
 .imagen{
@@ -17,27 +29,11 @@
 }
 .boton{
     
-    margin-right: 140px;
+    margin-right: 10px;
     text-align: center;
 }
-.container{
-    margin-left: 60px;
-    float:left;
 
-    position: relative;
-   
-}
-.container h2{
-    color: #893920;
-    
-    text-align: center;
-    padding-top: 20px;
-    margin: 0px;
-    width: 645px;
-    height: 60px;
-    background-color: #feefc6;
-    position: absolute;
-} 
+
 .barra{
     margin-left: 140px;
     position: relative;
@@ -54,11 +50,11 @@
     overflow-y: scroll;
     max-height: 700px;
     
-    margin-right: 120px;
-    position: absolute;
-  right: 0; /* Coloca el contenido a la derecha */
-  top: 0; 
-   margin-top: 150px;
+    margin-right: 0px;
+    /* position: absolute;
+  right: 0; /* Coloca el contenido a la derecha 
+  top: 0;  */
+   margin-top: 30px;
     height: 450px;
     width: 400px;
     border: #893920 10px double;
@@ -69,26 +65,38 @@ ul{
     list-style: none;
 }
 li{
-    padding-left: 15px;
-    padding-top: 35px;
-    height: 96px;
+   padding: 30px;
+    height: 150px;
     
 }
-.amarillo{
+.titulo-amarillo{
     background-color: #feefc6;
+    font-size: 25px;
+    
 }
-.blanco{
+.titulo-blanco{
     background-color: #FFF;
+    font-size: 25px;
 }
-.titulo{
-    font-size: 20px;
-}
-.titulo:hover{
+
+.titulo-amarillo:hover{
     font-weight: bolder;
 }
-.subtitulo{
+.titulo-blanco:hover{
+    font-weight: bolder;
+}
+
+.subtitulo-amarillo{
     
     padding: 0;
+    font-size: 15px;
+    height: 20px;
+    text-align: center;
+}
+.subtitulo-blanco{
+    
+    padding: 0;
+    font-size: 15px;
     height: 20px;
     text-align: center;
 }
@@ -101,90 +109,156 @@ li{
     margin-bottom: 0px;
 }
 .resenatitulo{
-    height: 230px;
+    height: 280px;
 }
 .nombreresena{
     font-size: 25px;
     text-align: left;
 }
-.resena2{
 
+.resena-blanco{
+    background-color: #FFF;
+    height: 200px;
     font-size: 20px;
 }
-.resenablanco{
-    background-color: #FFF;
-    height: 230px;
-}
-.resenaamarillo{
+.resena-amarillo{
     background-color: #feefc6;
     height: 230px;
+    font-size: 20px;
+}
+.menu-blanco{
+    
+    background-color: #FFF;
+    height: 160px;
+    font-size: 20px;
+}
+.menu-amarillo{
+    
+    background-color: #feefc6;
+    height: 160px;
+    font-size: 20px;
+}
+.comida{
+    margin: 0;
+    font-size: 25px;
 }
 .like{
     float: right;
     height: 25px;
     margin-left: 20px;
-    margin-right: 10px
+}
+.mapa{
+    margin-top: 40px;
+    height: 460px; 
+    width: 680px;
 }
 /* se agregan estilos de leaflet*/
 @import '~leaflet/dist/leaflet.css';
 
-/*@media (max-width: 768px) {
-    .cuadro {
-        margin-right: 0; 
-        width: 70%; 
-        max-height: none; 
-        position: relative;
-        margin-top: 10px; 
-        padding: 10px; 
+@media only screen and (max-width: 600px) {
+    *{
+        margin: 0;
     }
-}
-
-
-
-@media (max-width: 768px) {
-    .container {
-        margin-right: 0;
+    .imagen {
+        width: 100%;
+        height: auto;
         margin-left: 0;
-        width: 100%; 
+    }
+    .mapa {
+        width: 100%;
+        height:300px;
+        margin-left: 0;
+    }
+
+    .titulocafe {
+        margin-left: 0;
+    }
+
+    .barra {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .cuadro {
+        width: 100%;
+        margin: 30px 0;
+
+    }
+    .resena-blanco{
+        height: 250px;
+    }
+    .resena-amarillo{
+        height: 250px;
+    }
+    .resenatitulo {
+        height: auto;
+    }
+
+    .nombreresena {
         text-align: center;
     }
 
-    .container h2 {
-        width: auto; 
-    }
-
-    iframe {
-        width: 100%; 
+    .like {
+        float: none;
+        margin: 10px 0;
     }
 }
 
-
-@media (max-width: 576px) {
-    .container h2 {
-        font-size: 24px;
+/* Tablet styles */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .imagen {
+        width: 80%;
+        margin-left: 10%;
+        
+        
     }
-
-    .btn {
-        margin-right: 0;
-        float: none; 
-        margin-bottom: 10px; 
+    .mapa {
+        width: 80%;
+     
     }
 
     
-}
-@media (max-width: 768px) {
+
     .barra {
-        margin-left: 10px; 
-        width: 100%; 
-        margin-right: 10px; 
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .cuadro {
+        width: 80%;
+        margin: 30px 10%;
     }
 }
 
-
-@media (max-width: 576px) {
-    .barra {
+/* Larger screens */
+@media only screen and (min-width: 1025px) {
+    .container {
         margin-left: 10px;
-        width: 100%; 
-        margin-right: 10px; 
     }
-}*/
+
+    .imagen {
+        width: 640px;
+        height: 420px;
+        margin-left: 80px;
+    }
+    .mapa {
+        width: 640px;
+        height: 420px;
+        margin-left: 80px;
+    }
+    .descripcioncafe{
+        margin-left: 70px;
+    }
+    .titulocafe {
+        margin-left:70px;
+    }
+
+    .barra {
+        margin-left: 140px;
+    }
+
+    .cuadro {
+        width: 400px;
+        margin: 30px;
+    }
+}

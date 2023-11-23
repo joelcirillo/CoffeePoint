@@ -2,7 +2,7 @@
     color: #FFF;
 }
 div{
-    padding: 10px;
+padding-top: 10px;
     background-color: #893920;
     text-align: center;
     font-size: 20px;
@@ -10,4 +10,9 @@ div{
     color: #FFF;
     height: 50px;
     margin-top: 40px;
+}
+
+button{
+    background-color: #00000000;
+    border: 0;
 }
