@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 // Servicio de Autentificación de Firebase
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Usuario } from "src/app/models/usuario";
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   // referenciamos Auth de Firebase
-  constructor(public auth: AngularFireAuth) { }
+  constructor(public auth: AngularFireAuth, database: AngularFirestore) {
+    this.usuarioColeccion = database.collection('usuario')
+   }
+  private usuarioColeccion: AngularFirestoreCollection<Usuario>
 
   // FUNCIÓN PARA LOGIN
   iniciarSesion(email: string, contrasena: string){
@@ -31,6 +39,14 @@ export class AuthService {
     }else{
       return user.uid;
     }
+  }
+  obtenerUsuario(uid: string): Observable<any> {
+    return this.usuarioColeccion.doc<any>(uid).valueChanges();
+  }
+ 
+
+  obtenerUsuarios(): Observable<any[]> {
+    return this.usuarioColeccion.valueChanges({ idField: 'uid' });
   }
 
   cerrarSesion(){

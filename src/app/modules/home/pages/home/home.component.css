@@ -35,7 +35,7 @@ body {
 
 
 .barra{
-    margin-left: 140px;
+   
     position: relative;
 }
 *{
@@ -118,12 +118,12 @@ li{
 
 .resena-blanco{
     background-color: #FFF;
-    height: 200px;
+    height: auto;
     font-size: 20px;
 }
 .resena-amarillo{
     background-color: #feefc6;
-    height: 230px;
+    height: auto;
     font-size: 20px;
 }
 .menu-blanco{
@@ -138,6 +138,7 @@ li{
     height: 160px;
     font-size: 20px;
 }
+
 .comida{
     margin: 0;
     font-size: 25px;
@@ -155,7 +156,9 @@ li{
 /* se agregan estilos de leaflet*/
 @import '~leaflet/dist/leaflet.css';
 
-@media only screen and (max-width: 600px) {
+/* para hacerlo responsive que se vea bien en el celular */
+
+@media only screen and (max-width: 600px) {/* para patallas chicas */
     *{
         margin: 0;
     }
@@ -185,10 +188,10 @@ li{
 
     }
     .resena-blanco{
-        height: 250px;
+        height: auto;
     }
     .resena-amarillo{
-        height: 250px;
+        height: auto;
     }
     .resenatitulo {
         height: auto;
@@ -204,8 +207,8 @@ li{
     }
 }
 
-/* Tablet styles */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
+/* medianas */
+@media only screen and (min-width: 601px) and (max-width: 1024px) { 
     .imagen {
         width: 80%;
         margin-left: 10%;
@@ -230,7 +233,7 @@ li{
     }
 }
 
-/* Larger screens */
+/* normales */
 @media only screen and (min-width: 1025px) {
     .container {
         margin-left: 10px;
@@ -254,7 +257,8 @@ li{
     }
 
     .barra {
-        margin-left: 140px;
+        width: 400px; 
+        margin-left: 30px;
     }
 
     .cuadro {

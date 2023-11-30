@@ -10,6 +10,8 @@
         <div class="row">
             <!-- Primera columna -->
             <div class="col-sm-6">
+                <!-- botones de arriba que manejan las vistas -->
+                <!-- hidden es para mostrar un componente u otro a partir de verdadero o falso -->
                 <button type="button" [hidden]="ocultarBotonMenuGeneral" (click)="mostrarMenuGeneral()"
                     class="btn boton" style="background-color:#a55e49 ; color: #FFF; ">Populares</button><button
                     type="button" [hidden]="ocultarBotonMenuPersonal" (click)="mostrarMenuPersonal()" class="btn boton"
@@ -20,7 +22,7 @@
                     style="background-color:#a55e49 ; color: #FFF; ">Cafeterías</button>
                 <button [hidden]="ocultarBotonAgregar" type="button" class="btn boton"
                     style="background-color:#FFF ; color: #a55e49 ;border-color: #a55e49; font-weight: bolder;"
-                    data-bs-toggle="modal" data-bs-target="#agregarCafeteria">
+                    data-bs-toggle="modal" data-bs-target="#agregarCafeteria"  >
                     Agregar Cafetería
                 </button>
                 <button [hidden]="ocultarBotonPopulares" type="button" class="btn boton"
@@ -88,8 +90,7 @@
                             <p style="margin: 0;">{{ resenasCafeteria.length }} reseñas</p>
                             <form (ngSubmit)="agregarResena(idCafeteriaSeleccionada)">
                                 <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input
-                                    type="number" min="1" max="5" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje"
-                                    placeholder="Puntaje" />
+                                type="range" min="0" max="5" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje" class="puntajebarra" /> <span>{{ nuevoPuntaje }}</span>
                                 <input [(ngModel)]="nuevaResena" placeholder="Escribir tu opinón..." name="nuevaResena"
                                     type="text" class="form-control" style="background-color: #c2806d;"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -238,7 +239,7 @@
                     type="text" class="form-control" style="background-color: #c2806d;"
                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 <button type="submit" class="btn boton"
-                    style="background-color:#a55e49 ; color: #FFF; ">Agregar</button>
+                    style="background-color:#a55e49 ; color: #FFF; "  data-bs-dismiss="modal">Agregar</button>
             </form>
 
             <!-- Corresponde a las ACCIONES -->
@@ -273,7 +274,7 @@
 
             <!-- Corresponde a las ACCIONES -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="editarMenu()">Editar</button>
+                <button type="button" class="btn btn-primary" (click)="editarMenu()"  data-bs-dismiss="modal">Editar</button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -298,7 +299,7 @@
     </div>
 
 </div>
-
+<!-- modal para agregar cafeteria -->
 <div class="modal fade" id="agregarCafeteria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -307,23 +308,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div [formGroup]="cafeteria" class="modal-body">
+                <p>(Si alguno de los campos esta incompleto, no se creará la cafetería)</p>
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese nombre de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="nombre" placeholder="...">
+                    <input type="text" class="form-control" formControlName="nombre" required placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese dirección:</label>
-                    <input type="text" class="form-control" formControlName="direccion" placeholder="...">
+                    <input type="text" class="form-control" formControlName="direccion" required placeholder="...">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese una imagen de la cafeteria:</label>
-                    <input type="text" class="form-control" formControlName="imagen" placeholder="...">
+                    <input type="text" class="form-control" formControlName="imagen" required placeholder="...">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Ingrese descripción:</label>
-                    <input type="text" class="form-control" formControlName="descripcion" placeholder="...">
+                    <input type="text" class="form-control" formControlName="descripcion" required placeholder="...">
                 </div>
 
             </div>
