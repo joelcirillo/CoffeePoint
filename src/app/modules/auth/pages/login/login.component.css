@@ -1,40 +1,36 @@
 .container {
     border: 10px double;
     border-radius: 20px;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    max-width: 90%;
-    height: 400px;
+
+    max-width: 90%; /* Cambiado de width a max-width */
+    height:500px; /* Cambiado de height a auto para mantener la proporción */
     width: 400px;
-    color: #893920;
-    
-    
+  
 }
 
 .card {
     background-color: #FFDD86;
-    position: relative;
-    width: 100%;
-    height: auto;
+
+    position: relative; /* Cambiado a relative para que se ajuste al contenedor */
+    width: 100%; /* Cambiado a 100% para ocupar el ancho del contenedor */
+    height: 200px; /* Cambiado a auto para mantener la proporción */
     font-family: 'Josefin Sans', sans-serif;
     border: none;
-    margin-top: 20px;
+    margin-top: 20px; /* Añadido un margen superior */
+    margin-bottom: 20px;
 }
 
 .imagen {
-    position: relative;
-    width: 100%;
-    height: auto;
-    max-width: 500px;
-    margin-top: 20px;
+    position: relative; /* Cambiado a relative para que se ajuste al contenedor */
+    width: 400px; /* Cambiado a 100% para ocupar el ancho del contenedor */
+    height: 400px; /* Cambiado a auto para mantener la proporción */
+   /* max-width: 500px; /* Añadido un max-width para limitar el tamaño en pantallas grandes */
+    margin-top: 20px; /* Añadido un margen superior */
 }
 
 .btn {
     background-color: #C01818;
-    padding: 10px 20px;
-}
+    padding: 10px 20px; /* Añadido un relleno para que sea más fácil hacer clic en dispositivos móvile
 
 .letra {
     color: #C01818;
@@ -44,6 +40,8 @@
 @media (max-width: 768px) {
     .container {
         width: 90%;
-        max-width: none;
+
+        max-width: none; /* Eliminado el max-width para que ocupe el ancho completo en pantallas pequeñas */
     }
 }
+

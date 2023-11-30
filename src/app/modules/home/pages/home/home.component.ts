@@ -30,14 +30,10 @@ export class HomeComponent implements AfterViewInit {
       iconAnchor: [22, 94], // Punto de anclaje del icono
       popupAnchor: [-3, -76] // Punto donde aparecerá el popup en relación con el icono
     });
-
+    //fija la vista inicial del mapa
     let map = L.map('map').setView([-38.93993532247614, -67.99217337786433], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(map);
-
+    
     L.marker([-38.93993532247614, -67.99217337786433], { icon: myIcon }).addTo(map);
   }
 
@@ -53,7 +49,7 @@ export class HomeComponent implements AfterViewInit {
     }).addTo(map);
 
     L.marker([-38.93993532247614, -67.99217337786433]).addTo(map)// poner variable
-      .bindPopup('Estación Margus')
+      .bindPopup('Plaza Var')
       .openPopup();
       L.marker([-38.938821187047125, -67.99516673862628]).addTo(map)// poner variable
       .bindPopup('Havanna')
@@ -81,7 +77,7 @@ export class HomeComponent implements AfterViewInit {
 
   modalVisibleProducto: boolean = false;
   // ENLAZA NUESTRO FORMULARIO
-  
+  //validator es para que no quede vacio el campo
   cafeteria = new FormGroup({
     nombre: new FormControl('', Validators.required),
     imagen: new FormControl('', Validators.required),
@@ -137,6 +133,7 @@ export class HomeComponent implements AfterViewInit {
     this.ocultarBarradeBusquedaCafe=true;
 
   }
+  //retroseder
   volver() {
     this.ocultarMapa = false;
     this.ocultarImagen = true;
@@ -155,6 +152,7 @@ export class HomeComponent implements AfterViewInit {
     
 
   }
+  //mostrar populares
   mostrarMenuGeneral() {
     this.ocultarMapa = false;
     this.ocultarImagen = true;
@@ -229,13 +227,14 @@ export class HomeComponent implements AfterViewInit {
   constructor(
     // llamamos servicio Crud
     private servicioCrud: CrudService,
+    //modales
     public dialog: MatDialog,
     
   ) { }
   
 
   ngOnInit() {
-
+//leer los datos 
     this.obtenerCafeterias();
     this.obtenerPopulares();
     this.obtenerResenas();
@@ -293,7 +292,7 @@ export class HomeComponent implements AfterViewInit {
         alert("No se pudo modificar la comida popular \n" + error)
       })
   }
-
+  //opciones principal cafeteria
   obtenerCafeterias() {
     this.servicioCrud.obtenerCafeterias().subscribe(
       (cafeterias: any[]) => {

@@ -26,7 +26,7 @@
       <p class="letra">contraseña</p>
       <li class="list-group-item"><div class="input-group flex-nowrap">
         <span class="input-group-text" id="addon-wrapping">☕</span>
-        <input  [(ngModel)]="usuario.contrasena" type="text" class="input" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="addon-wrapping">
+        <input  [(ngModel)]="usuario.contrasena" [type]="showPassword ? 'text' : 'password'" type="password" type="text" class="input" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="addon-wrapping"><button  (click)="togglePasswordVisibility()"><img src="../../../../../assets/visible.png" alt="" style="width: 20px;"></button>
       </div></li><br>
 
 

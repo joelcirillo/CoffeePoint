@@ -9,6 +9,7 @@ import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth"; 
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+//modulos de los componentes
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';

@@ -75,4 +75,9 @@ export class RegisterComponent {
     const uid = await this.servicioAuth.getUid();
     console.log(uid);
   }
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 }
