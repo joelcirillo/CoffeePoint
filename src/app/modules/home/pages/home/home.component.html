@@ -444,7 +444,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva cafeteria</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese una nueva comida popular</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div [formGroup]="populares" class="modal-body">
@@ -527,8 +527,9 @@
                 <!-- Recibe los nuevos valores -->
                 <div class="mb-3">
                     <label class="form-label">Ingrese puntaje nuevamente:</label>
-                    <input type="number" min="1" max="5" class="form-control" formControlName="puntuacion"
-                        placeholder="...">
+                    <img src="../../../../../assets/1estrella.png" style="height: 35px;" alt=""><input
+                                type="range" min="0" max="5" [(ngModel)]="nuevoPuntaje" name="nuevoPuntaje" formControlName="puntuacion"class="puntajebarra" /> <span>{{ nuevoPuntaje }}</span>
+                    
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ingrese reseña nuevamente:</label>

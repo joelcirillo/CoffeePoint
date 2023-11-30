@@ -1,3 +1,6 @@
+*{
+    color: #893920;
+}
 .container {
     border: 10px double;
     border-radius: 20px;
@@ -5,6 +8,7 @@
     max-width: 90%; /* Cambiado de width a max-width */
     height:500px; /* Cambiado de height a auto para mantener la proporción */
     width: 400px;
+    color:#893920 ;
   
 }
 
@@ -29,6 +33,7 @@
 }
 
 .btn {
+    color: #FFDD86;
     background-color: #C01818;
     padding: 10px 20px; /* Añadido un relleno para que sea más fácil hacer clic en dispositivos móvile
 
@@ -45,3 +50,4 @@
     }
 }
 
+}
